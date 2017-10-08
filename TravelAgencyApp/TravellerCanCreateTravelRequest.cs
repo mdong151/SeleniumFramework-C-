@@ -15,6 +15,7 @@ namespace TravelAgencyApp
             TravelAgencyPages.CreatePage.GoTo();
             TravelAgencyPages.CreatePage.FakeAuthenTo("bach phuong chi");
             TravelAgencyPages.CreatePage.FillPlanTrip();
+            //random comments
             
             
         }
