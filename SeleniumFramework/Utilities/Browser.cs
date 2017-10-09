@@ -59,6 +59,14 @@ namespace SeleniumFramework
             {
                 by = By.CssSelector(locator);
             }
+            else if (how.ToLower().Contains("linktext"))
+            {
+                by = By.LinkText(locator);
+            }
+            else if (how.ToLower().Contains("class"))
+            {
+                by = By.ClassName(locator);
+            }
             return by;
         }
 

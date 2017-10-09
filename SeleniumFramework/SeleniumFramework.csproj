@@ -83,7 +83,6 @@
     <Compile Include="Pages\MyMembershipPage.cs" />
     <Compile Include="Pages\Pages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utilities\ExcelUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

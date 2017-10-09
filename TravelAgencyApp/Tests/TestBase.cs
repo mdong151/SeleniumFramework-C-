@@ -10,6 +10,7 @@ namespace TravelAgencyApp
         [SetUp]
         public void Initialize()
         {
+
             Browser.Initialize();
             Browser.Maximize();
             Console.WriteLine("Initialize sucessfully!");

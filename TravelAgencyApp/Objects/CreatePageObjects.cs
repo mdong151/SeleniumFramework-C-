@@ -15,9 +15,11 @@ namespace TravelAgencyApp
         //[FindsBy(How = How.XPath, Using = "//div[@class='blockUI blockOverlay']")]
         //public IWebElement loaddingOverlayObject { get; set; }
 
-        public By LoaddingOverlayObject { get { return By.XPath("//div[@class='blockUI blockOverlay']"); } }
+        //public By LoaddingOverlayObject { get { return By.XPath("//div[@class='blockUI blockOverlay']"); } }
 
-        public By PlaneRadio { get { return By.XPath("//input[@id='radio_Flight']/following-sibling::div"); } }
+        public By LoaddingOverlayObject = Browser.GetElementBy("xpath", "//div[@class='blockUI blockOverlay']");
+
+        public By PlaneRadio = Browser.GetElementBy("xpath", "//input[@id='radio_Flight']/following-sibling::div");
 
         public By UserMenuButton { get { return By.Id("userMenu"); } }
 

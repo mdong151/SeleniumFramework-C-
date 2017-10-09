@@ -5,10 +5,10 @@ using System;
 
 namespace TravelAgencyApp 
 {    
-    public class TravellerCanCreateTravelRequest : TestBase
+    public class CreateTravelRequest : TestBase
     {
        [Test]
-       public void CreateTravelRequest()
+       public void TravelAgentCanCreateTravelRequest()
         {
             TravelAgencyPages.CreatePage.GoTo();
             TravelAgencyPages.CreatePage.FakeAuthenTo("bach phuong chi");

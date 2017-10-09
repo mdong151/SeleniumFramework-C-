@@ -12,7 +12,7 @@ namespace TravelAgencyApp
         public void GoTo()
         {
             Browser.GoTo("https://mnguyen3@amaris.com:Amaris2017@inte.amaris.com/TravelAgency/Create", false);
-            
+            Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject, PAGE_TIME_OUT);
         }
          
         public void FakeAuthenTo(string user)
@@ -21,7 +21,6 @@ namespace TravelAgencyApp
             if (!currentUser.ToLower().Contains(user))
             {
                 UserMenuButton.Select();
-
                 Browser.SearchAndSelect(UserMenuSearchField, user, PAGE_TIME_OUT);
                 Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject, PAGE_TIME_OUT);
             }
