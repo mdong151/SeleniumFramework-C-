@@ -12,7 +12,7 @@ namespace TravelAgencyApp
         public void GoTo()
         {
             Browser.GoTo("https://mnguyen3@amaris.com:Amaris2017@inte.amaris.com/TravelAgency/Create", false);
-
+            
         }
          
         public void FakeAuthenTo(string user)

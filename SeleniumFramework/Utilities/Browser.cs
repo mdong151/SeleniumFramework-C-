@@ -81,6 +81,11 @@ namespace SeleniumFramework
             GetElement(how, locator).Clear();
             GetElement(how, locator).SendKeys(textToType);
         }
+        public static void EnterText(this IWebElement element, string textToType)
+        {
+            element.Clear();
+            element.SendKeys(textToType);
+        }
         public static void PressEnter(string how,string locator)
         {
             GetElement(how, locator).SendKeys(Keys.Enter);
