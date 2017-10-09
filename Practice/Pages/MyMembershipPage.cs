@@ -16,7 +16,7 @@ namespace Practice
         }
         public void ClickEditProfileButton()
         {
-            Browser.Click("xpath", "//span[contains(text(),'Edit Profile')]");
+            Browser.Select("xpath", "//span[contains(text(),'Edit Profile')]");
         }
     }
 }

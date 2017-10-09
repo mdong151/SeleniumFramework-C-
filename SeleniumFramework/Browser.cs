@@ -7,7 +7,7 @@ using System.Threading;
 
 namespace SeleniumFramework
 {
-    public class Browser
+    public static class Browser
     {
         private static IWebDriver _webDriver = new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
         //private static IWebDriver _webDriver = new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
@@ -76,7 +76,7 @@ namespace SeleniumFramework
             return text;
         }
 
-        public static void SetText(string how, string locator,string textToType)
+        public static void EnterText(string how, string locator,string textToType)
         {
             GetElement(how, locator).Clear();
             GetElement(how, locator).SendKeys(textToType);
@@ -86,9 +86,14 @@ namespace SeleniumFramework
             GetElement(how, locator).SendKeys(Keys.Enter);
         }
         
-        public static void Click(string how, string locator)
+        public static void Select(string how, string locator)
         {
             GetElement(how, locator).Click();
+        }
+
+        public static void Select(this IWebElement element)
+        {
+            element.Click();
         }
 
 
@@ -152,14 +157,24 @@ namespace SeleniumFramework
             var wait = new WebDriverWait(_webDriver,TimeSpan.FromSeconds(timeout));
             return wait.Until(ExpectedConditions.InvisibilityOfElementLocated(GetElementBy(how,locator)));
         }
+        public static bool WaitUntilElementIsInvisibled(IWebElement element, int timeout)
+        {
+
+            return true;
+        }
 
         //to handle Travel Agency search field 
         public static void SearchAndSelect(string how, string locator, string textToSearch,int timeout)
         {
             WaitUntilElementIsDisplayed(how, locator,timeout);
-            Browser.SetText(how, locator, textToSearch);
+            Browser.EnterText(how, locator, textToSearch);
             Browser.WaitUntilElementIsInvisibled("xpath", "//li[contains(text(),'Searching…')]", timeout);
             Browser.PressEnter(how, locator);
+        }
+
+        public static void SelectDropdown(string how, string locator, string value)
+        {
+            new SelectElement(GetElement(how, locator)).SelectByText(value);
         }
     }
 }

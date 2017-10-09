@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TravelAgencyApp.Objects;
 using SeleniumFramework;
 
-namespace TravelAgencyApp
+namespace TravelAgencyApp.Pages
 {
-    public class CreatePage
+    public class CreatePage : CreatePageObjects
     {
         #region constant
         private int PAGE_TIME_OUT = 30;
@@ -12,15 +13,15 @@ namespace TravelAgencyApp
         public void GoTo()
         {
             Browser.GoTo("https://mnguyen3@amaris.com:Amaris2017@inte.amaris.com/TravelAgency/Create", false);
-            Assert.IsTrue(Browser.WaitUntilElementIsInvisibled("xpath", "//div[@class='blockUI blockOverlay']", PAGE_TIME_OUT));
-        }
 
+        }
+         
         public void FakeAuthenTo(string user)
         {
             string currentUser = Browser.GetText("id", "userMenu");
             if (!currentUser.ToLower().Contains(user))
             {
-                Browser.Click("id", "userMenu");
+                Browser.Select("id", "userMenu");
                 Browser.SearchAndSelect("id", "s2id_autogen18_search", user, PAGE_TIME_OUT);
                 Browser.WaitUntilElementIsInvisibled("xpath", "//div[@class='blockUI blockOverlay']", PAGE_TIME_OUT);
             }

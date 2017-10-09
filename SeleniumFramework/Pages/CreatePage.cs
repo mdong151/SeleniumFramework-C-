@@ -18,7 +18,7 @@ namespace SeleniumFramework
             string currentUser = Browser.GetText("id", "userMenu");
             if (!currentUser.ToLower().Contains(user))
             {
-                Browser.Click("id", "userMenu");
+                Browser.Select("id", "userMenu");
                 Browser.SearchAndSelect("id", "s2id_autogen18_search", user, 30);
             }
         }

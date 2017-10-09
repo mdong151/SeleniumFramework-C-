@@ -11,9 +11,9 @@ namespace SeleniumFramework
 
         public void Login(string username, string password)
         {
-            Browser.SetText("ID", "user_login", username);
-            Browser.SetText("Id", "user_pass", password);
-            Browser.Click("iD", "wp-submit");
+            Browser.EnterText("ID", "user_login", username);
+            Browser.EnterText("Id", "user_pass", password);
+            Browser.Select("iD", "wp-submit");
         }
 
         public bool IsAt()
