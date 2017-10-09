@@ -11,48 +11,41 @@ namespace TravelAgencyApp
 {
     public class CreatePageObjects
     {
-        public CreatePageObjects()
-        {
-            PageFactory.InitElements(Browser.Driver, this);
-        }
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='blockUI blockOverlay']")]
-        public IWebElement loaddingOverlayObject { get; set; }
+        //[FindsBy(How = How.XPath, Using = "//div[@class='blockUI blockOverlay']")]
+        //public IWebElement loaddingOverlayObject { get; set; }
 
-        [FindsBy(How = How.XPath, Using = "//input[@id='radio_Flight']/following-sibling::div")]
-        public IWebElement planeRadio { get; set; }
+        public By LoaddingOverlayObject { get { return By.XPath("//div[@class='blockUI blockOverlay']"); } }
 
-        [FindsBy(How = How.Id,Using = "userMenu")]
-        public IWebElement userMenuButton { get; set; }
+        public By PlaneRadio { get { return By.XPath("//input[@id='radio_Flight']/following-sibling::div"); } }
 
-        [FindsBy(How = How.Id, Using = "s2id_autogen18_search")]
-        public IWebElement userMenuSearchField { get; set; }
+        public By UserMenuButton { get { return By.Id("userMenu"); } }
 
-        [FindsBy(How = How.XPath,Using = "//li[.='Searching…']")]
-        public IWebElement searchingLabel { get; set; }
+        public By UserMenuSearchField { get { return By.Id("s2id_autogen18_search"); } }
 
-        [FindsBy(How = How.Id, Using = "s2id_autogen3")]
-        public IWebElement travellerSearchField { get; set; }
+        public By SearchingLabel { get { return By.XPath("//li[.='Searching…']"); } }
 
-        [FindsBy(How = How.XPath, Using = "//input[@id='radio_any_Transport']/following-sibling::div")]
-        public IWebElement anyTransportRadio { get; set; }
+        public By TravellerSearchField { get { return By.Id("s2id_autogen3"); }  }
 
-        [FindsBy(How = How.XPath, Using = "//input[@id='radio_Train']/following-sibling::div")]
-        public IWebElement trainRadio { get; set; }
+        public By AnyTransportRadio { get { return By.XPath("//input[@id='radio_any_Transport']/following-sibling::div"); } }
 
-        [FindsBy(How = How.XPath, Using = "//input[@id='checkBox_CarRental']/following-sibling::div")]
-        public IWebElement carRentalCheckbox { get; set; }
+        public By TrainRadio { get { return By.XPath("//input[@id='radio_Train']/following-sibling::div"); } }
 
-        [FindsBy(How = How.XPath, Using = "//input[@id='checkBox_Taxi']/following-sibling::div")]
-        public IWebElement taxiCheckbox { get; set; }
+        public By CarRentalCheckbox { get { return By.XPath("//input[@id='checkBox_CarRental']/following-sibling::div"); } }
 
-        [FindsBy(How = How.XPath, Using = "//input[@id='checkBox_Hotel']/following-sibling::div")]
-        public IWebElement hotelCheckbox { get; set; }
+        public By TaxiCheckbox { get { return By.XPath("//input[@id='checkBox_Taxi']/following-sibling::div"); } }
 
-        [FindsBy(How = How.Id, Using = "FromDateTimeAllModule")]
-        public IWebElement startDateField { get; set; }
+        public By HotelCheckbox { get { return By.XPath("//input[@id='checkBox_Hotel']/following-sibling::div"); } }
 
-        [FindsBy(How = How.Id, Using = "ToDateTimeAllModule")]
-        public IWebElement endDateField { get; set; }
+        public By StartDateField { get { return By.Id("FromDateTimeAllModule"); } }
+
+        public By EndDateField { get { return By.Id("ToDateTimeAllModule"); } }
+
+        public By FromField { get { return By.Id("select2-chosen-4"); } }
+
+        public By ToField { get { return By.Id("select2-chosen-5"); } }
+
+        public By FirstContinueButton { get { return By.Id("btnNextFirstPage"); } }
+
     }
 }

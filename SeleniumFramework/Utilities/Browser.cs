@@ -13,7 +13,7 @@ namespace SeleniumFramework
         //private static IWebDriver _webDriver = new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
         private static string _baseUrl = "";
         //private static string _baseUrl = "https://inte.amaris.com/TravelAgency/";
-
+        private const int TIME_OUT = 10;
         public static ISearchContext Driver { get { return _webDriver; } }
         public static string Title { get { return _webDriver.Title; } }
  
@@ -68,41 +68,63 @@ namespace SeleniumFramework
             ele = _webDriver.FindElement(GetElementBy(how, locator));
             return ele;
         }
-
-        public static string GetText(string how, string locator)
+        public static IWebElement GetElement(this By element,int timeout = TIME_OUT)
         {
+            return _webDriver.FindElement(element);
+        }
+
+        public static string GetText(string how, string locator,int timeoutInSeconds = TIME_OUT)
+        {
+            WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
             string text;
             text = GetElement(how, locator).Text;
             return text;
         }
 
-        public static void EnterText(string how, string locator,string textToType)
+        public static string GetText(this By element,int timeoutInSeconds = TIME_OUT)
         {
+            element.WaitUntilElementIsDisplayed(timeoutInSeconds);
+            string text;
+            text = element.GetElement().Text;
+            return text;
+        }
+
+        public static void EnterText(string how, string locator,string textToType,int timeoutInSeconds = TIME_OUT)
+        {
+            WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
             GetElement(how, locator).Clear();
             GetElement(how, locator).SendKeys(textToType);
         }
-        public static void EnterText(this IWebElement element, string textToType)
+        public static void EnterText(this By byElement, string textToType,int timeoutInSeconds = TIME_OUT)
         {
-            element.Clear();
-            element.SendKeys(textToType);
+            byElement.WaitUntilElementIsDisplayed(timeoutInSeconds);
+            byElement.GetElement().Clear();
+            byElement.GetElement().SendKeys(textToType);
         }
         public static void PressEnter(string how,string locator)
         {
             GetElement(how, locator).SendKeys(Keys.Enter);
         }
-        
-        public static void Select(string how, string locator)
+
+        public static void PressEnter(this By byElement)
         {
+            GetElement(byElement).SendKeys(Keys.Enter);
+        }
+
+        public static void Select(string how, string locator,int timeoutInSeconds = TIME_OUT)
+        {
+            WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
             GetElement(how, locator).Click();
         }
 
-        public static void Select(this IWebElement element)
+        public static void Select(this By byElement,int timeoutInSeconds = TIME_OUT)
         {
-            element.Click();
+            byElement.WaitUntilElementIsDisplayed(timeoutInSeconds);
+            byElement.GetElement().Click();
         }
 
 
-        public static bool WaitUntilElementIsDisplayed(string how,string locator,int timeoutInSeconds)
+        public static bool WaitUntilElementIsDisplayed(string how,string locator,int timeoutInSeconds = TIME_OUT)
         {
             for(int i = 0; i < timeoutInSeconds; i++)
             {
@@ -112,6 +134,13 @@ namespace SeleniumFramework
                 }
                 Thread.Sleep(1000);
             }
+            return false;
+        }
+
+        public static bool WaitUntilElementIsDisplayed(this By byElement, int timeoutInSeconds = TIME_OUT)
+        {
+            WebDriverWait wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
+            wait.Until(ExpectedConditions.ElementIsVisible(byElement));
             return false;
         }
 
@@ -150,31 +179,41 @@ namespace SeleniumFramework
             Thread.Sleep(miliseconds);
         }
 
-        public static void Authenticate(string username,string password)
-        {
-            WaitFor(5);
-            _webDriver.SwitchTo().Alert().SetAuthenticationCredentials(username,password);
-        }
+        //public static void Authenticate(string username,string password)
+        //{
+        //    WaitFor(5);
+        //    _webDriver.SwitchTo().Alert().SetAuthenticationCredentials(username,password);
+        //}
 
-        public static bool WaitUntilElementIsInvisibled(string how, string locator, int timeout)
+        public static bool WaitUntilElementIsInvisibled(string how, string locator, int timeoutInSeconds = TIME_OUT)
         {
             WaitUntilElementIsDisplayed(how, locator, 30);
-            var wait = new WebDriverWait(_webDriver,TimeSpan.FromSeconds(timeout));
+            var wait = new WebDriverWait(_webDriver,TimeSpan.FromSeconds(timeoutInSeconds));
             return wait.Until(ExpectedConditions.InvisibilityOfElementLocated(GetElementBy(how,locator)));
         }
-        public static bool WaitUntilElementIsInvisibled(IWebElement element, int timeout)
-        {
 
-            return true;
+        public static bool WaitUntilElementIsInvisibled(this By byElement, int timeoutInSeconds = TIME_OUT)
+        {
+            WaitUntilElementIsDisplayed(byElement, timeoutInSeconds);
+            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
+            return wait.Until(ExpectedConditions.InvisibilityOfElementLocated(byElement));
         }
 
         //to handle Travel Agency search field 
-        public static void SearchAndSelect(string how, string locator, string textToSearch,int timeout)
+        public static void SearchAndSelect(string how, string locator, string textToSearch,int timeoutInSeconds = TIME_OUT)
         {
-            WaitUntilElementIsDisplayed(how, locator,timeout);
-            Browser.EnterText(how, locator, textToSearch);
-            Browser.WaitUntilElementIsInvisibled("xpath", "//li[contains(text(),'Searching…')]", timeout);
-            Browser.PressEnter(how, locator);
+            WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
+            EnterText(how, locator, textToSearch);
+            WaitUntilElementIsInvisibled("xpath", "//li[contains(text(),'Searching…')]", timeoutInSeconds);
+            PressEnter(how, locator);
+        }
+
+        public static void SearchAndSelect (this By byElement, string textToSearch,int timeoutInSeconds = TIME_OUT)
+        {
+            byElement.WaitUntilElementIsDisplayed(timeoutInSeconds);
+            byElement.EnterText(textToSearch);
+            WaitUntilElementIsInvisibled("xpath", "//li[contains(text(),'Searching…')]", timeoutInSeconds);
+            byElement.PressEnter();
         }
 
         public static void SelectDropdown(string how, string locator, string value)

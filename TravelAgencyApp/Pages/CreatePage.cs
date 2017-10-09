@@ -17,19 +17,20 @@ namespace TravelAgencyApp
          
         public void FakeAuthenTo(string user)
         {
-            string currentUser = Browser.GetText("id", "userMenu");
+            string currentUser = UserMenuButton.GetText();
             if (!currentUser.ToLower().Contains(user))
             {
-                Browser.Select("id", "userMenu");
-                Browser.SearchAndSelect("id", "s2id_autogen18_search", user, PAGE_TIME_OUT);
-                Browser.WaitUntilElementIsInvisibled("xpath", "//div[@class='blockUI blockOverlay']", PAGE_TIME_OUT);
+                UserMenuButton.Select();
+
+                Browser.SearchAndSelect(UserMenuSearchField, user, PAGE_TIME_OUT);
+                Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject, PAGE_TIME_OUT);
             }
         }
 
         public void FillPlanTrip()
         {
-            Browser.SearchAndSelect("id", "s2id_autogen3", "nguyen manh dong", PAGE_TIME_OUT);
-            Browser.WaitUntilElementIsInvisibled("xpath", "//div[@class='blockUI blockOverlay']", PAGE_TIME_OUT);
+            Browser.SearchAndSelect(TravellerSearchField, "nguyen manh dong", PAGE_TIME_OUT);
+            Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject, PAGE_TIME_OUT);
         }
     }
 }
