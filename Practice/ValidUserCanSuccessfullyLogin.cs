@@ -13,7 +13,7 @@ namespace Practice
     public class ValidUserCanSuccessfullyLogin : TestBase
     {
 
-        [TestMethod]
+        
         public void ValidUserCanSuccessfullyLoginTest()
         {
             PracticePages.LoginPage.GoTo();

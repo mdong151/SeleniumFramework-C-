@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TravelAgencyApp.Objects
+namespace TravelAgencyApp
 {
     public class CreatePageObjects
     {

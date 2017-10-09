@@ -1,13 +1,10 @@
-﻿//using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿
 using NUnit.Framework;
 using SeleniumFramework;
 using System;
-using TravelAgencyApp.Pages;
-using TravelAgencyApp.Tests;
 
-namespace TravelAgencyApp.Test 
-{
-    
+namespace TravelAgencyApp 
+{    
     public class TravellerCanCreateTravelRequest : TestBase
     {
        [Test]

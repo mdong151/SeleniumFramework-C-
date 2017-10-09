@@ -1,9 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TravelAgencyApp.Objects;
 using SeleniumFramework;
 
-namespace TravelAgencyApp.Pages
+namespace TravelAgencyApp
 {
     public class CreatePage : CreatePageObjects
     {

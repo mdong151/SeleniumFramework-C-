@@ -2,7 +2,7 @@
 using SeleniumFramework;
 using System;
 
-namespace TravelAgencyApp.Tests
+namespace TravelAgencyApp
 {
 
     public class TestBase
@@ -19,7 +19,7 @@ namespace TravelAgencyApp.Tests
         [TearDown]
         public void Cleanup()
         {
-            //Browser.Close();
+            Browser.Close();
         }
     }
 }

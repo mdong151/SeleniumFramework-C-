@@ -66,7 +66,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Browser.cs" />
+    <Compile Include="Utilities\Browser.cs" />
     <Compile Include="Pages\CreatePage.cs" />
     <Compile Include="Pages\EditProfilePage.cs" />
     <Compile Include="Pages\LoginPage.cs" />

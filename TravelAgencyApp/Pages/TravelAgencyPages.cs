@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium.Support.PageObjects;
 using SeleniumFramework;
-namespace TravelAgencyApp.Pages
+
+
+namespace TravelAgencyApp
 {
     public static class TravelAgencyPages
     {
