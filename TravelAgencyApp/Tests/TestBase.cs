@@ -2,7 +2,7 @@
 using SeleniumFramework;
 using System;
 
-namespace TravelAgencyApp
+namespace TravelAgencyApp.Tests
 {
 
     public class TestBase

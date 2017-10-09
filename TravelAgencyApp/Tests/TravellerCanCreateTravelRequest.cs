@@ -3,8 +3,9 @@ using NUnit.Framework;
 using SeleniumFramework;
 using System;
 using TravelAgencyApp.Pages;
+using TravelAgencyApp.Tests;
 
-namespace TravelAgencyApp 
+namespace TravelAgencyApp.Test 
 {
     
     public class TravellerCanCreateTravelRequest : TestBase
@@ -12,16 +13,9 @@ namespace TravelAgencyApp
        [Test]
        public void CreateTravelRequest()
         {
-            //Pages.CreatePage.GoTo();
-            //Pages.CreatePage.FakeAuthenTo("bach phuong chi");
-            //Pages.CreatePage.FillPlanTrip();
             TravelAgencyPages.CreatePage.GoTo();
-            
             TravelAgencyPages.CreatePage.FakeAuthenTo("bach phuong chi");
-            TravelAgencyPages.CreatePage.FillPlanTrip();
-            //random comments
-            
-            
+            TravelAgencyPages.CreatePage.FillPlanTrip(); 
         }
     }
 }
