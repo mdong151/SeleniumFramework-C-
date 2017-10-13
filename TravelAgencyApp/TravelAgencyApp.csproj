@@ -71,11 +71,18 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Configurations\TestEnvironmentTypes.cs" />
+    <Compile Include="Settings\AppConfigKeys.cs" />
+    <Compile Include="Configurations\AppConfigReader.cs" />
+    <Compile Include="Configurations\BrowserTypes.cs" />
     <Compile Include="Data\UserData.cs" />
     <Compile Include="ObjectsCollection\CreatePageObjects.cs" />
+    <Compile Include="ObjectsCollection\RequestToHandlePageObjects.cs" />
     <Compile Include="PagesCollection\CreatePage.cs" />
     <Compile Include="PagesCollection\Pages.cs" />
+    <Compile Include="PagesCollection\RequestToHandlePage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\Practice.cs" />
     <Compile Include="Tests\TestBase.cs" />
     <Compile Include="Tests\CreateTravelRequest.cs" />
     <Compile Include="Utilities\Browser.cs" />
@@ -85,9 +92,7 @@
     <None Include="Data\Data.xlsx" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Configurations\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Drivers\chromedriver.exe" />
     <Content Include="Drivers\IEDriverServer.exe" />

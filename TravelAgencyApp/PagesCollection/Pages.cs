@@ -19,5 +19,13 @@ namespace TravelAgencyApp.PagesCollection
                 return GetPage<CreatePage>();
             }
         }
+
+        public static RequestToHandlePage RequestToHandlePage
+        {
+            get
+            {
+                return GetPage<RequestToHandlePage>();
+            }
+        }
     }
 }
