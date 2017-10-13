@@ -81,8 +81,6 @@
     <Compile Include="Pages\MyMembershipPage.cs" />
     <Compile Include="Pages\PracticePages.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestBase.cs" />
-    <Compile Include="ValidUserCanSuccessfullyLogin.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SeleniumFramework\SeleniumFramework.csproj">

@@ -1,18 +1,16 @@
-﻿
-using NUnit.Framework;
-using SeleniumFramework;
-using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using TravelAgencyApp.PagesCollection;
 
-namespace TravelAgencyApp 
-{    
+namespace TravelAgencyApp.Tests
+{
+    [TestClass]
     public class CreateTravelRequest : TestBase
     {
-       [Test]
+       [TestMethod]
        public void TravelAgentCanCreateTravelRequest()
         {
-            TravelAgencyPages.CreatePage.GoTo();
-            TravelAgencyPages.CreatePage.FakeAuthenTo("bach phuong chi");
-            TravelAgencyPages.CreatePage.FillPlanTrip(); 
+            Pages.CreatePage.GoTo();
+            
         }
     }
 }

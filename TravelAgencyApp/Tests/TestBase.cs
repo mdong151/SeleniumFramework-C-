@@ -1,13 +1,13 @@
-﻿using NUnit.Framework;
-using SeleniumFramework;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-
-namespace TravelAgencyApp
+using TravelAgencyApp.Ultilities;
+using TravelAgencyApp.PagesCollection;
+namespace TravelAgencyApp.Tests
 {
-
+    [TestClass]
     public class TestBase
     {
-        [SetUp]
+        [TestInitialize]
         public void Initialize()
         {
 
@@ -17,10 +17,11 @@ namespace TravelAgencyApp
             
         }
 
-        [TearDown]
+        [TestCleanup]
         public void Cleanup()
         {
             Browser.Close();
+            
         }
     }
 }
