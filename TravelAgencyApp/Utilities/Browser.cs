@@ -14,7 +14,6 @@ namespace TravelAgencyApp.Ultilities
     {
 
         private static IWebDriver _webDriver;
-
         private static BrowserTypes _browser = (BrowserTypes)AppConfigReader.GetBrowser();
         private static TestEnvironmentTypes _testEnvironment = (TestEnvironmentTypes)AppConfigReader.GetTestEnvironment();
         private const int TIME_OUT = 20;
@@ -40,9 +39,6 @@ namespace TravelAgencyApp.Ultilities
                 return null;
             }
         }
-        //{
-
-        //}
 
         public static void Initialize()
         {

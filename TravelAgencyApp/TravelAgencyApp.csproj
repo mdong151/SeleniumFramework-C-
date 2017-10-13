@@ -40,13 +40,20 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExcelDataReader, Version=3.2.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.2.0\lib\net45\ExcelDataReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.2.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.2.0\lib\net45\ExcelDataReader.DataSet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebDriver, Version=3.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Selenium.WebDriver.3.6.0\lib\net45\WebDriver.dll</HintPath>
       <Private>True</Private>
@@ -75,7 +82,6 @@
     <Compile Include="Settings\AppConfigKeys.cs" />
     <Compile Include="Configurations\AppConfigReader.cs" />
     <Compile Include="Configurations\BrowserTypes.cs" />
-    <Compile Include="Data\UserData.cs" />
     <Compile Include="ObjectsCollection\CreatePageObjects.cs" />
     <Compile Include="ObjectsCollection\RequestToHandlePageObjects.cs" />
     <Compile Include="PagesCollection\CreatePage.cs" />
@@ -86,6 +92,7 @@
     <Compile Include="Tests\TestBase.cs" />
     <Compile Include="Tests\CreateTravelRequest.cs" />
     <Compile Include="Utilities\Browser.cs" />
+    <Compile Include="Utilities\ExcelReader.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
