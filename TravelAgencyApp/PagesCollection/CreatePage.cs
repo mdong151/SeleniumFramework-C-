@@ -19,7 +19,7 @@ namespace TravelAgencyApp.PagesCollection
         public void FakeAuthenTo(string user)
         {
             string currentUser = UserMenuButton.GetText();
-            if (!currentUser.ToLower().Contains(user))
+            if (!currentUser.Trim().ToLower().Contains(user.Trim().ToLower()))
             {
                 UserMenuButton.Select();
                 Browser.SearchAndSelect(UserMenuSearchField, user, PAGE_TIME_OUT);
@@ -27,10 +27,72 @@ namespace TravelAgencyApp.PagesCollection
             }
         }
 
-        public void FillPlanTrip()
+        public void FillPlanTrip(
+            string travelType,string traveller,
+            string mainTransportType,
+            string startDate,string endDate,
+            string fromPlace,string toPlace,
+            string additionalServices = null
+            )
         {
-            Browser.SearchAndSelect(TravellerSearchField, "nguyen manh dong", PAGE_TIME_OUT);
+            //
+            //TODO: inmplement Traveltype selection
+            //
+            Browser.SearchAndSelect(TravellerSearchField, traveller, PAGE_TIME_OUT);
             Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject, PAGE_TIME_OUT);
+            
+            if (mainTransportType.ToLower().Contains("any"))
+            {
+                AnyTransportRadio.Select();
+                AnyTransportFromPlaceField.Select();
+                AnyTransportFromPlaceSearchField.SearchAndSelect(fromPlace);
+                AnyTransportToPlaceField.Select();
+                AnyTransportToPlaceSearchField.SearchAndSelect(toPlace);
+
+            }
+            else if (mainTransportType.ToLower().Contains("plane"))
+            {
+                PlaneRadio.Select();
+                PlaneFromPlaceField.Select();
+                PlaneFromPlaceSearchField.SearchAndSelect(fromPlace);
+                PlaneToPlaceField.Select();
+                PlaneToPlaceSearchField.SearchAndSelect(toPlace);
+            }
+            else if (mainTransportType.ToLower().Contains("train"))
+            {
+                TrainRadio.Select();
+                TrainFromPlaceField.Select();
+                TrainFromPlaceSearchField.SearchAndSelect(fromPlace);
+                TrainToPlaceField.Select();
+                TrainToPlaceSearchField.SearchAndSelect(toPlace);
+            }
+
+            StartDateField.ClearAndEnterText(startDate);
+            EndDateField.ClearAndEnterText(endDate);
+
+            //
+            //TODO : implement additional services
+            //
+
+            
+
         }
+        public void submitPlanATripForm(bool isHurry = true)
+        {
+            if (isHurry == true)
+            {
+                ImInAHurryButton.Select();
+            }
+            else if (isHurry == false)
+            {
+                FirstContinueButton.Select();
+            }
+        }
+        public string getPopupMessage()
+        {
+            string message = PopupMessage.GetText();
+            return message;
+        }
+ 
     }
 }

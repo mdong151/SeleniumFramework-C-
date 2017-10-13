@@ -98,16 +98,26 @@ namespace TravelAgencyApp.Ultilities
             return text;
         }
 
-        public static void EnterText(string how, string locator,string textToType,int timeoutInSeconds = TIME_OUT)
+        public static void ClearAndEnterText(string how, string locator,string textToType,int timeoutInSeconds = TIME_OUT)
         {
             WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
             GetElement(how, locator).Clear();
             GetElement(how, locator).SendKeys(textToType);
         }
-        public static void EnterText(this By byElement, string textToType,int timeoutInSeconds = TIME_OUT)
+        public static void EnterText(string how, string locator, string textToType, int timeoutInSeconds = TIME_OUT)
+        {
+            WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
+            GetElement(how, locator).SendKeys(textToType);
+        }
+        public static void ClearAndEnterText(this By byElement, string textToType,int timeoutInSeconds = TIME_OUT)
         {
             byElement.WaitUntilElementIsDisplayed(timeoutInSeconds);
             byElement.GetElement().Clear();
+            byElement.GetElement().SendKeys(textToType);
+        }
+        public static void EnterText(this By byElement, string textToType, int timeoutInSeconds = TIME_OUT)
+        {
+            byElement.WaitUntilElementIsDisplayed(timeoutInSeconds);
             byElement.GetElement().SendKeys(textToType);
         }
         public static void PressEnter(string how,string locator)

@@ -10,7 +10,6 @@ namespace TravelAgencyApp.Tests
         [TestInitialize]
         public void Initialize()
         {
-
             Browser.Initialize();
             Browser.Maximize();
             Console.WriteLine("Initialize sucessfully!");
@@ -20,7 +19,7 @@ namespace TravelAgencyApp.Tests
         [TestCleanup]
         public void Cleanup()
         {
-            Browser.Close();
+            //Browser.Close();
             
         }
     }

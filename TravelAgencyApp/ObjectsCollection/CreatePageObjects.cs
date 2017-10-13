@@ -39,15 +39,32 @@ namespace TravelAgencyApp.Objects
 
         public By HotelCheckbox { get { return By.XPath("//input[@id='checkBox_Hotel']/following-sibling::div"); } }
 
-        public By StartDateField { get { return By.Id("FromDateTimeAllModule"); } }
+        public By StartDateField { get { return By.XPath("//div[@id='FromDateTimeAllModule']/input[@class='datepickerinput form-control']"); } }
 
-        public By EndDateField { get { return By.Id("ToDateTimeAllModule"); } }
+        public By EndDateField { get { return By.XPath("//div[@id='ToDateTimeAllModule']/input[@class='datepickerinput form-control']"); } }
 
-        public By FromField { get { return By.Id("select2-chosen-4"); } }
+        public By PlaneFromPlaceField { get { return By.Id("select2-chosen-4"); } }
+        public By PlaneFromPlaceSearchField { get { return By.Id("s2id_autogen4_search"); } }
 
-        public By ToField { get { return By.Id("select2-chosen-5"); } }
+        public By PlaneToPlaceField { get { return By.Id("select2-chosen-5"); } }
+        public By PlaneToPlaceSearchField { get { return By.Id("s2id_autogen5_search"); } }
+
+        public By AnyTransportFromPlaceField = Browser.GetElementBy("id", "select2-chosen-6");
+        public By AnyTransportFromPlaceSearchField = Browser.GetElementBy("id", "s2id_autogen6_search");
+
+        public By AnyTransportToPlaceField = Browser.GetElementBy("id", "select2-chosen-7");
+        public By AnyTransportToPlaceSearchField = Browser.GetElementBy("id", "s2id_autogen7_search");
+
+        public By TrainFromPlaceField = Browser.GetElementBy("id", "select2-chosen-6");
+        public By TrainFromPlaceSearchField = Browser.GetElementBy("id", "s2id_autogen6_search");
+
+        public By TrainToPlaceField = Browser.GetElementBy("id", "select2-chosen-7");
+        public By TrainToPlaceSearchField = Browser.GetElementBy("id", "s2id_autogen7_search");
 
         public By FirstContinueButton { get { return By.Id("btnNextFirstPage"); } }
 
+        public By ImInAHurryButton = Browser.GetElementBy("id", "btnSubmitWithoutInformation");
+
+        public By PopupMessage = Browser.GetElementBy("xpath", "//p[@class='content']");
     }
 }
