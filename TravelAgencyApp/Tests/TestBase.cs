@@ -19,7 +19,7 @@ namespace TravelAgencyApp.Tests
         [TestCleanup]
         public void Cleanup()
         {
-            //Browser.Close();
+            Browser.Close();
             
         }
     }
