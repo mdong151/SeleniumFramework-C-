@@ -78,10 +78,9 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Configurations\TestEnvironmentTypes.cs" />
+    <Compile Include="Configurations\Types.cs" />
     <Compile Include="Settings\AppConfigKeys.cs" />
     <Compile Include="Configurations\AppConfigReader.cs" />
-    <Compile Include="Configurations\BrowserTypes.cs" />
     <Compile Include="ObjectsCollection\CreatePageObjects.cs" />
     <Compile Include="ObjectsCollection\RequestToHandlePageObjects.cs" />
     <Compile Include="PagesCollection\CreatePage.cs" />

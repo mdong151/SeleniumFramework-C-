@@ -6,14 +6,14 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Threading;
 using TravelAgencyApp.Configurations;
-
+using static TravelAgencyApp.Configurations.Types;
 
 namespace TravelAgencyApp.Ultils
 {
     public class Browser
     {
         private static readonly BrowserTypes BrowserType = AppConfigReader.GetBrowser();
-        private static readonly TestEnvironmentTypes TestEnvironment = AppConfigReader.GetTestEnvironment();
+        private static readonly Types.TestEnvironmentTypes TestEnvironment = AppConfigReader.GetTestEnvironment();
         public static IWebDriver Driver { get; private set; }
         private static int Timeout { get; set; } = AppConfigReader.GetTimeout();
         public static string Title { get; } = Driver.Title;

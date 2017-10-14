@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Configuration;
 using TravelAgencyApp.Settings;
+using static TravelAgencyApp.Configurations.Types;
 
 namespace TravelAgencyApp.Configurations
 {
@@ -13,10 +14,10 @@ namespace TravelAgencyApp.Configurations
             return (BrowserTypes)Enum.Parse(typeof(BrowserTypes), browser);
         }
 
-        public static TestEnvironmentTypes GetTestEnvironment()
+        public static Types.TestEnvironmentTypes GetTestEnvironment()
         {
             string testEnv = ConfigurationManager.AppSettings.Get(AppConfigKeys.TestEnvironment);
-            return (TestEnvironmentTypes)Enum.Parse(typeof(TestEnvironmentTypes), testEnv);
+            return (Types.TestEnvironmentTypes)Enum.Parse(typeof(Types.TestEnvironmentTypes), testEnv);
         }
 
         public static string GetUsername()
