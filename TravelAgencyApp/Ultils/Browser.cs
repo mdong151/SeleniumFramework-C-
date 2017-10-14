@@ -12,6 +12,11 @@ namespace TravelAgencyApp.Ultils
 {
     public class Browser
     {
+        #region Hardcoded
+        //for Travel Agency
+        private static readonly By SearchingLabel = GetElementBy("xpath", "//li[contains(text(),'Searching…')]");
+        #endregion
+
         private static readonly BrowserTypes BrowserType = AppConfigReader.GetBrowser();
         private static readonly TestEnvironmentTypes TestEnvironment = AppConfigReader.GetTestEnvironment();
         public static IWebDriver Driver { get; private set; }
@@ -278,12 +283,6 @@ namespace TravelAgencyApp.Ultils
             Thread.Sleep(miliseconds);
         }
 
-        //public static void Authenticate(string username,string password)
-        //{
-        //    WaitFor(5);
-        //    _webDriver.SwitchTo().Alert().SetAuthenticationCredentials(username,password);
-        //}
-
         public static bool WaitUntilElementIsInvisibled(string how, string locator, int timeoutInSeconds)
         {
             WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
@@ -313,7 +312,7 @@ namespace TravelAgencyApp.Ultils
         {
             WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
             EnterText(how, locator, textToSearch);
-            WaitUntilElementIsInvisibled("xpath", "//li[contains(text(),'Searching…')]", timeoutInSeconds);
+            WaitUntilElementIsInvisibled(SearchingLabel, timeoutInSeconds);
             PressEnter(how, locator);
         }
 
@@ -326,7 +325,7 @@ namespace TravelAgencyApp.Ultils
         {
             WaitUntilElementIsDisplayed(byElement,timeoutInSeconds);
             EnterText(byElement,textToSearch);
-            WaitUntilElementIsInvisibled("xpath", "//li[contains(text(),'Searching…')]", timeoutInSeconds);
+            WaitUntilElementIsInvisibled(SearchingLabel, timeoutInSeconds);
             PressEnter(byElement);
         }
 
