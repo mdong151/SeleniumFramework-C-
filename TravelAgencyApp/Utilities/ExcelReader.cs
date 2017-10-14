@@ -33,7 +33,7 @@ namespace TravelAgencyApp.Utilities
                 _cache.Add(sheetName, reader);
             }
             DataTable table = reader.AsDataSet().Tables[sheetName];
-            return GetData(table.Rows[row][column].GetType(),table.Rows[row][column];
+            return GetData(table.Rows[row][column].GetType(),table.Rows[row][column]);
         }
 
         private static object GetData(Type type,object data)

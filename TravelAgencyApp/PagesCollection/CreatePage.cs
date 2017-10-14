@@ -13,7 +13,6 @@ namespace TravelAgencyApp.PagesCollection
         #endregion
         public void GoTo()
         {
-            //Browser.GoTo("https://mnguyen3@amaris.com:Amaris2017@inte.amaris.com/TravelAgency/Create", false);
             Browser.GoToPageWithCredentials("/create");
             Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject, PAGE_TIME_OUT);
         }

@@ -16,8 +16,8 @@ namespace TravelAgencyApp.Tests
         [TestMethod]
         public void PracticeTest()
         {
-            string value = ExcelReader.GetCellData(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\TravelAgencyApp\Data\Data.xlsx", "Sheet1", 1, 0);
-            Console.WriteLine(value);
+            //string value = ExcelReader.GetCellData(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\TravelAgencyApp\Data\Data.xlsx", "Sheet1", 1, 0);
+            //Console.WriteLine(value);
         }
           
     }
