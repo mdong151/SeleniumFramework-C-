@@ -12,14 +12,27 @@ namespace TravelAgencyApp.Ultilities
 {
     public class Browser
     {
-
         private static IWebDriver _webDriver;
         private static BrowserTypes _browser = (BrowserTypes)AppConfigReader.GetBrowser();
         private static TestEnvironmentTypes _testEnvironment = (TestEnvironmentTypes)AppConfigReader.GetTestEnvironment();
         private static int TIME_OUT = AppConfigReader.GetTimeout();
                 
-        public static IWebDriver Driver { get { return _webDriver; } }
-        public static string Title { get { return _webDriver.Title; } }
+        public static IWebDriver Driver
+        {
+            get
+            {
+                return _webDriver;
+            }
+        }
+
+        public static string Title
+        {
+            get
+            {
+                return _webDriver.Title;
+            }
+        }
+
         private static string BaseUrl
         {
             get
@@ -58,28 +71,17 @@ namespace TravelAgencyApp.Ultilities
 
         public static void GoToPage(string url,bool useBaseUrl = true)
         {
-            if (useBaseUrl == true)
-            {
-                _webDriver.Navigate().GoToUrl("https://"+ BaseUrl + url);
-            }
-            else
-            {
-                _webDriver.Navigate().GoToUrl(url);
-            }
-            
+            string goToURL = (useBaseUrl) ? "https://" + BaseUrl + url : url;
+            _webDriver.Navigate().GoToUrl(goToURL);           
         }
+
         public static void GoToPageWithCredentials(string url, bool useBase = true)
         {
             string username = AppConfigReader.GetUsername();
             string password = AppConfigReader.GetPassword();
-            if(useBase == true)
-            {
-                _webDriver.Navigate().GoToUrl("https://" + username + ":" + password + "@" + BaseUrl + url);
-            }
-            else
-            {
-                _webDriver.Navigate().GoToUrl("https://" + username + ":" + password + "@" + url.Substring(1,url.Length-1));
-            }
+            string goToURL = (useBase) ? "https://" + username + ":" + password + "@" + BaseUrl + url 
+                : "https://" + username + ":" + password + "@" + url.Substring(1, url.Length - 1);
+            _webDriver.Navigate().GoToUrl(goToURL);
         }
 
         public static void Close()
@@ -131,9 +133,7 @@ namespace TravelAgencyApp.Ultilities
         public static string GetText(string how, string locator,int timeoutInSeconds)
         {
             WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
-            string text;
-            text = GetElement(how, locator).Text;
-            return text;
+            return GetElement(how, locator).Text;
         }
 
         public static string GetText(string how, string locator)
@@ -144,9 +144,7 @@ namespace TravelAgencyApp.Ultilities
         public static string GetText(By element,int timeoutInSeconds)
         {
             WaitUntilElementIsDisplayed(element,timeoutInSeconds);
-            string text;
-            text = GetElement(element).Text;
-            return text;
+            return GetElement(element).Text;
         }
 
         public static string GetText(By byElement)

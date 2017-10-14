@@ -8,13 +8,11 @@ namespace TravelAgencyApp.PagesCollection
 {
     public class CreatePage : CreatePageObjects
     {
-        #region constant
-        private int PAGE_TIME_OUT = 60;
-        #endregion
+
         public void GoTo()
         {
             Browser.GoToPageWithCredentials("/create");
-            Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject, PAGE_TIME_OUT);
+            Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject);
         }
          
         public void FakeAuthenTo(string user)
@@ -23,8 +21,8 @@ namespace TravelAgencyApp.PagesCollection
             if (!currentUser.Trim().ToLower().Contains(user.Trim().ToLower()))
             {
                 Browser.Select(UserMenuButton);
-                Browser.SearchAndSelect(UserMenuSearchField, user, PAGE_TIME_OUT);
-                Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject, PAGE_TIME_OUT);
+                Browser.SearchAndSelect(UserMenuSearchField, user);
+                Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject);
             }
         }
 
@@ -37,11 +35,10 @@ namespace TravelAgencyApp.PagesCollection
             string additionalServices = null
             )
         {
+
             //
             //TODO: inmplement Traveltype selection
             //
-
-            
             //Browser.SearchAndSelect(TravellerSearchField, traveller, PAGE_TIME_OUT);
             //Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject, PAGE_TIME_OUT);
             
@@ -52,7 +49,6 @@ namespace TravelAgencyApp.PagesCollection
                 Browser.SearchAndSelect(AnyTransportFromPlaceSearchField,fromPlace);
                 Browser.Select(AnyTransportToPlaceField);
                 Browser.SearchAndSelect(AnyTransportToPlaceSearchField,toPlace);
-
             }
             else if (mainTransportType.ToLower().Contains("plane"))
             {
