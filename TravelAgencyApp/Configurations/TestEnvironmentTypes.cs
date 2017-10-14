@@ -3,8 +3,8 @@ namespace TravelAgencyApp.Configurations
 {
     public enum TestEnvironmentTypes
     {
-        QA,
-        INTE,
-        PRD,
+        Qa,
+        Inte,
+        Product,
     }
 }

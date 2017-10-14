@@ -12,38 +12,23 @@ namespace TravelAgencyApp.Ultils
 {
     public class Browser
     {
-        private static IWebDriver _webDriver;
-        private static BrowserTypes _browser = AppConfigReader.GetBrowser();
-        private static TestEnvironmentTypes _testEnvironment = AppConfigReader.GetTestEnvironment();
-        private static int TIME_OUT = AppConfigReader.GetTimeout();
-                
-        public static IWebDriver Driver
-        {
-            get
-            {
-                return _webDriver;
-            }
-        }
-
-        public static string Title
-        {
-            get
-            {
-                return _webDriver.Title;
-            }
-        }
+        private static readonly BrowserTypes BrowserType = AppConfigReader.GetBrowser();
+        private static readonly TestEnvironmentTypes TestEnvironment = AppConfigReader.GetTestEnvironment();
+        public static IWebDriver Driver { get; private set; }
+        private static int Timeout { get; set; } = AppConfigReader.GetTimeout();
+        public static string Title { get; } = Driver.Title;
 
         private static string BaseUrl
         {
             get
             {
-                switch (_testEnvironment)
+                switch (TestEnvironment)
                 {
-                    case TestEnvironmentTypes.INTE:
+                    case TestEnvironmentTypes.Inte:
                         return "inte.amaris.com/TravelAgency";
-                    case TestEnvironmentTypes.QA:
+                    case TestEnvironmentTypes.Qa:
                         return "qaarp.amaris.com/TravelAgency";
-                    case TestEnvironmentTypes.PRD:
+                    case TestEnvironmentTypes.Product:
                         return "arp.amaris.com/TravelAgency";
                     default:
                         return null;
@@ -53,19 +38,19 @@ namespace TravelAgencyApp.Ultils
 
         public static void Initialize()
         {
-            switch (_browser)
+            switch (BrowserType)
             {
                 case BrowserTypes.InternetExplorer:
-                    _webDriver = new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
+                    Driver = new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
                     break;
                 case BrowserTypes.Chrome:
-                    _webDriver = new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
+                    Driver = new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
                     break;
                 case BrowserTypes.Firefox:
-                    _webDriver = new FirefoxDriver();
+                    Driver = new FirefoxDriver();
                     break;
                 default:
-                    _webDriver = null;
+                    Driver = null;
                     break;
             }
         }
@@ -73,7 +58,7 @@ namespace TravelAgencyApp.Ultils
         public static void GoToPage(string url,bool useBaseUrl = true)
         {
             string goToUrl = (useBaseUrl) ? "https://" + BaseUrl + url : url;
-            _webDriver.Navigate().GoToUrl(goToUrl);           
+            Driver.Navigate().GoToUrl(goToUrl);           
         }
 
         public static void GoToPageWithCredentials(string url, bool useBase = true)
@@ -82,12 +67,12 @@ namespace TravelAgencyApp.Ultils
             string password = AppConfigReader.GetPassword();
             string goToUrl = (useBase) ? "https://" + username + ":" + password + "@" + BaseUrl + url 
                 : "https://" + username + ":" + password + "@" + url.Substring(1, url.Length - 1);
-            _webDriver.Navigate().GoToUrl(goToUrl);
+            Driver.Navigate().GoToUrl(goToUrl);
         }
 
         public static void Close()
         {
-            _webDriver.Close();
+            Driver.Close();
         }
 
         public static By GetElementBy(string how,string locator)
@@ -122,12 +107,12 @@ namespace TravelAgencyApp.Ultils
 
         public static IWebElement GetElement(string how,string locator)
         {
-            return _webDriver.FindElement(GetElementBy(how, locator));
+            return Driver.FindElement(GetElementBy(how, locator));
 
         }
         public static IWebElement GetElement(By byElement)
         {
-            return _webDriver.FindElement(byElement);
+            return Driver.FindElement(byElement);
         }
 
         public static string GetText(string how, string locator,int timeoutInSeconds)
@@ -138,7 +123,7 @@ namespace TravelAgencyApp.Ultils
 
         public static string GetText(string how, string locator)
         {
-            return GetText(how, locator, TIME_OUT);
+            return GetText(how, locator, Timeout);
         }
 
         public static string GetText(By element,int timeoutInSeconds)
@@ -149,7 +134,7 @@ namespace TravelAgencyApp.Ultils
 
         public static string GetText(By byElement)
         {
-            return GetText(byElement,TIME_OUT);
+            return GetText(byElement,Timeout);
         }
 
         public static void ClearAndEnterText(string how, string locator,string textToType,int timeoutInSeconds)
@@ -161,7 +146,7 @@ namespace TravelAgencyApp.Ultils
 
         public static void ClearAndEnterText(string how, string locator, string textToType)
         {
-            ClearAndEnterText(how, locator, textToType, TIME_OUT);
+            ClearAndEnterText(how, locator, textToType, Timeout);
         }
 
         public static void ClearAndEnterText(By byElement, string textToType, int timeoutInSeconds)
@@ -173,7 +158,7 @@ namespace TravelAgencyApp.Ultils
 
         public static void ClearAndEnterText(By byElement, string textToType)
         {
-            ClearAndEnterText(byElement, textToType, TIME_OUT);
+            ClearAndEnterText(byElement, textToType, Timeout);
         }
 
         public static void EnterText(string how, string locator, string textToType, int timeoutInSeconds )
@@ -184,7 +169,7 @@ namespace TravelAgencyApp.Ultils
 
         public static void EnterText(string how, string locator, string textToType)
         {
-            EnterText(how, locator, textToType, TIME_OUT);
+            EnterText(how, locator, textToType, Timeout);
         }
 
         public static void EnterText(By byElement, string textToType, int timeoutInSeconds)
@@ -195,7 +180,7 @@ namespace TravelAgencyApp.Ultils
 
         public static void EnterText(By byElement, string textToType)
         {
-            EnterText(byElement, textToType, TIME_OUT);
+            EnterText(byElement, textToType, Timeout);
         }
 
         public static void PressEnter(string how,string locator)
@@ -216,7 +201,7 @@ namespace TravelAgencyApp.Ultils
 
         public static void Select(string how, string locator)
         {
-            Select(how, locator, TIME_OUT);
+            Select(how, locator, Timeout);
         }
 
         public static void Select(By byElement,int timeoutInSeconds)
@@ -227,7 +212,7 @@ namespace TravelAgencyApp.Ultils
 
         public static void Select(By byElement)
         {
-            Select(byElement, TIME_OUT);
+            Select(byElement, Timeout);
         }
 
         public static bool WaitUntilElementIsDisplayed(string how,string locator,int timeoutInSeconds)
@@ -245,19 +230,19 @@ namespace TravelAgencyApp.Ultils
 
         public static bool WaitUntilElementIsDisplayed(string how, string locator)
         {
-            return WaitUntilElementIsDisplayed(how, locator, TIME_OUT);
+            return WaitUntilElementIsDisplayed(how, locator, Timeout);
         }
 
         public static bool WaitUntilElementIsDisplayed(By byElement, int timeoutInSeconds)
         {
-            WebDriverWait wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
+            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeoutInSeconds));
             wait.Until(ExpectedConditions.ElementIsVisible(byElement));
             return false;
         }
 
         public static bool WaitUntilElementIsDisplayed(By byElement)
         {
-            return WaitUntilElementIsDisplayed(byElement, TIME_OUT);
+            return WaitUntilElementIsDisplayed(byElement, Timeout);
         }
 
         public static bool ElementIsDisplayed(string how,string locator)
@@ -273,18 +258,18 @@ namespace TravelAgencyApp.Ultils
 
         public static bool IsAt(string pageTitle)
         {
-            return _webDriver.Title.Contains(pageTitle);
+            return Driver.Title.Contains(pageTitle);
         }
 
         public static void SwitchToTab(int tabIndex)
         {
-            var windows = _webDriver.WindowHandles;
-            _webDriver.SwitchTo().Window(windows[tabIndex]);
+            var windows = Driver.WindowHandles;
+            Driver.SwitchTo().Window(windows[tabIndex]);
         }
 
         public static void Maximize()
         {
-            _webDriver.Manage().Window.Maximize();
+            Driver.Manage().Window.Maximize();
         }
 
         public static void WaitFor(int seconds)
@@ -302,25 +287,25 @@ namespace TravelAgencyApp.Ultils
         public static bool WaitUntilElementIsInvisibled(string how, string locator, int timeoutInSeconds)
         {
             WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
-            var wait = new WebDriverWait(_webDriver,TimeSpan.FromSeconds(timeoutInSeconds));
+            var wait = new WebDriverWait(Driver,TimeSpan.FromSeconds(timeoutInSeconds));
             return wait.Until(ExpectedConditions.InvisibilityOfElementLocated(GetElementBy(how,locator)));
         }
 
         public static bool WaitUntilElementIsInvisibled(string how, string locator)
         {
-            return WaitUntilElementIsInvisibled(how, locator, TIME_OUT);
+            return WaitUntilElementIsInvisibled(how, locator, Timeout);
         }
 
         public static bool WaitUntilElementIsInvisibled(By byElement, int timeoutInSeconds)
         {
             WaitUntilElementIsDisplayed(byElement, timeoutInSeconds);
-            var wait = new WebDriverWait(_webDriver, TimeSpan.FromSeconds(timeoutInSeconds));
+            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeoutInSeconds));
             return wait.Until(ExpectedConditions.InvisibilityOfElementLocated(byElement));
         }
 
         public static bool WaitUntilElementIsInvisibled(By byElement)
         {
-            return WaitUntilElementIsInvisibled(byElement, TIME_OUT);
+            return WaitUntilElementIsInvisibled(byElement, Timeout);
         }
 
         //to handle Travel Agency search field 
@@ -334,7 +319,7 @@ namespace TravelAgencyApp.Ultils
 
         public static void SearchAndSelect(string how, string locator, string textToSearch)
         {
-            SearchAndSelect(how, locator, textToSearch, TIME_OUT);
+            SearchAndSelect(how, locator, textToSearch, Timeout);
         }
 
         public static void SearchAndSelect (By byElement, string textToSearch,int timeoutInSeconds)
@@ -347,7 +332,7 @@ namespace TravelAgencyApp.Ultils
 
         public static void SearchAndSelect(By byElement, string textToSearch)
         {
-            SearchAndSelect(byElement, textToSearch, TIME_OUT);
+            SearchAndSelect(byElement, textToSearch, Timeout);
         }
 
         public static void SelectDropdown(string how, string locator, string value)
