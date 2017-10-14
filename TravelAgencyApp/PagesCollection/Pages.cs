@@ -1,5 +1,5 @@
 ﻿using OpenQA.Selenium.Support.PageObjects;
-using TravelAgencyApp.Ultilities;
+using TravelAgencyApp.Ultils;
 
 namespace TravelAgencyApp.PagesCollection
 {

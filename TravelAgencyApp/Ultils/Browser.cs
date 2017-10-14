@@ -8,13 +8,13 @@ using System.Threading;
 using TravelAgencyApp.Configurations;
 
 
-namespace TravelAgencyApp.Ultilities
+namespace TravelAgencyApp.Ultils
 {
     public class Browser
     {
         private static IWebDriver _webDriver;
-        private static BrowserTypes _browser = (BrowserTypes)AppConfigReader.GetBrowser();
-        private static TestEnvironmentTypes _testEnvironment = (TestEnvironmentTypes)AppConfigReader.GetTestEnvironment();
+        private static BrowserTypes _browser = AppConfigReader.GetBrowser();
+        private static TestEnvironmentTypes _testEnvironment = AppConfigReader.GetTestEnvironment();
         private static int TIME_OUT = AppConfigReader.GetTimeout();
                 
         public static IWebDriver Driver
@@ -37,51 +37,52 @@ namespace TravelAgencyApp.Ultilities
         {
             get
             {
-                if (_testEnvironment == TestEnvironmentTypes.INTE)
+                switch (_testEnvironment)
                 {
-                    return "inte.amaris.com/TravelAgency";
+                    case TestEnvironmentTypes.INTE:
+                        return "inte.amaris.com/TravelAgency";
+                    case TestEnvironmentTypes.QA:
+                        return "qaarp.amaris.com/TravelAgency";
+                    case TestEnvironmentTypes.PRD:
+                        return "arp.amaris.com/TravelAgency";
+                    default:
+                        return null;
                 }
-                else if (_testEnvironment == TestEnvironmentTypes.QA)
-                {
-                    return "qaarp.amaris.com/TravelAgency";
-                }
-                else if (_testEnvironment == TestEnvironmentTypes.PRD)
-                {
-                    return "arp.amaris.com/TravelAgency";
-                }
-                return null;
             }
         }
 
         public static void Initialize()
         {
-            if(_browser == BrowserTypes.InternetExplorer)
+            switch (_browser)
             {
-                _webDriver = new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
-            }
-            else if (_browser == BrowserTypes.Chrome)
-            {
-                _webDriver = new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
-            }
-            else if (_browser == BrowserTypes.Firefox)
-            {
-                _webDriver = new FirefoxDriver();
+                case BrowserTypes.InternetExplorer:
+                    _webDriver = new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
+                    break;
+                case BrowserTypes.Chrome:
+                    _webDriver = new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
+                    break;
+                case BrowserTypes.Firefox:
+                    _webDriver = new FirefoxDriver();
+                    break;
+                default:
+                    _webDriver = null;
+                    break;
             }
         }
 
         public static void GoToPage(string url,bool useBaseUrl = true)
         {
-            string goToURL = (useBaseUrl) ? "https://" + BaseUrl + url : url;
-            _webDriver.Navigate().GoToUrl(goToURL);           
+            string goToUrl = (useBaseUrl) ? "https://" + BaseUrl + url : url;
+            _webDriver.Navigate().GoToUrl(goToUrl);           
         }
 
         public static void GoToPageWithCredentials(string url, bool useBase = true)
         {
             string username = AppConfigReader.GetUsername();
             string password = AppConfigReader.GetPassword();
-            string goToURL = (useBase) ? "https://" + username + ":" + password + "@" + BaseUrl + url 
+            string goToUrl = (useBase) ? "https://" + username + ":" + password + "@" + BaseUrl + url 
                 : "https://" + username + ":" + password + "@" + url.Substring(1, url.Length - 1);
-            _webDriver.Navigate().GoToUrl(goToURL);
+            _webDriver.Navigate().GoToUrl(goToUrl);
         }
 
         public static void Close()
@@ -121,9 +122,8 @@ namespace TravelAgencyApp.Ultilities
 
         public static IWebElement GetElement(string how,string locator)
         {
-            IWebElement ele = null;
-            ele = _webDriver.FindElement(GetElementBy(how, locator));
-            return ele;
+            return _webDriver.FindElement(GetElementBy(how, locator));
+
         }
         public static IWebElement GetElement(By byElement)
         {

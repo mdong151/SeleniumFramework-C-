@@ -3,17 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace TravelAgencyApp.Utilities
+namespace TravelAgencyApp.Ultils
 {
     public class ExcelReader
     {
         private static IDictionary<string, IExcelDataReader> _cache;
-        private static FileStream stream;
-        private static IExcelDataReader reader;
+        private static FileStream _stream;
+        private static IExcelDataReader _reader;
 
         static ExcelReader()
         {
@@ -24,15 +21,15 @@ namespace TravelAgencyApp.Utilities
         {
             if (_cache.ContainsKey(sheetName))
             {
-                reader = _cache[sheetName];
+                _reader = _cache[sheetName];
             }
             else
             {
-                stream = new FileStream(excelPath, FileMode.Open, FileAccess.Read);
-                reader = ExcelReaderFactory.CreateOpenXmlReader(stream);
-                _cache.Add(sheetName, reader);
+                _stream = new FileStream(excelPath, FileMode.Open, FileAccess.Read);
+                _reader = ExcelReaderFactory.CreateOpenXmlReader(_stream);
+                _cache.Add(sheetName, _reader);
             }
-            DataTable table = reader.AsDataSet().Tables[sheetName];
+            DataTable table = _reader.AsDataSet().Tables[sheetName];
             return GetData(table.Rows[row][column].GetType(),table.Rows[row][column]);
         }
 

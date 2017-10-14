@@ -1,8 +1,5 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TravelAgencyApp.Ultilities;
-using TravelAgencyApp.Objects;
-using OpenQA.Selenium;
+﻿using TravelAgencyApp.Ultils;
+using TravelAgencyApp.ObjectsCollection;
 
 namespace TravelAgencyApp.PagesCollection
 {
@@ -78,19 +75,11 @@ namespace TravelAgencyApp.PagesCollection
         }
         public void SubmitPlanATripForm(bool isHurry = true)
         {
-            if (isHurry == true)
-            {
-                Browser.Select(ImInAHurryButton);
-            }
-            else if (isHurry == false)
-            {
-                Browser.Select(FirstContinueButton);
-            }
+            Browser.Select(isHurry ? ImInAHurryButton : FirstContinueButton);
         }
         public string GetPopupMessage()
         {
-            string message = Browser.GetText(PopupMessage);
-            return message;
+            return Browser.GetText(PopupMessage);
         }
  
     }

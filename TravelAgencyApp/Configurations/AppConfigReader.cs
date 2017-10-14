@@ -6,6 +6,7 @@ namespace TravelAgencyApp.Configurations
 {
     public class AppConfigReader
     {
+
         public static BrowserTypes GetBrowser()
         {
             string browser = ConfigurationManager.AppSettings.Get(AppConfigKeys.Browser);

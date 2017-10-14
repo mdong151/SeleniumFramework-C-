@@ -1,7 +1,7 @@
 ﻿using OpenQA.Selenium;
-using TravelAgencyApp.Ultilities;
+using TravelAgencyApp.Ultils;
 
-namespace TravelAgencyApp.Objects
+namespace TravelAgencyApp.ObjectsCollection
 {
     public class CreatePageObjects
     {

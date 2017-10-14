@@ -1,11 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TravelAgencyApp.Configurations;
+
 using TravelAgencyApp.Utilities;
 
 namespace TravelAgencyApp.Tests
