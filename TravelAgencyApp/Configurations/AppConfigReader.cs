@@ -14,10 +14,10 @@ namespace TravelAgencyApp.Configurations
             return (BrowserTypes)Enum.Parse(typeof(BrowserTypes), browser);
         }
 
-        public static Types.TestEnvironmentTypes GetTestEnvironment()
+        public static TestEnvironmentTypes GetTestEnvironment()
         {
             string testEnv = ConfigurationManager.AppSettings.Get(AppConfigKeys.TestEnvironment);
-            return (Types.TestEnvironmentTypes)Enum.Parse(typeof(Types.TestEnvironmentTypes), testEnv);
+            return (TestEnvironmentTypes)Enum.Parse(typeof(TestEnvironmentTypes), testEnv);
         }
 
         public static string GetUsername()
