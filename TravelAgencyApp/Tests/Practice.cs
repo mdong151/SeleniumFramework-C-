@@ -1,7 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-
-using TravelAgencyApp.Ultils;
+using TravelAgencyApp.Keywords;
 
 namespace TravelAgencyApp.Tests
 {
@@ -11,8 +9,8 @@ namespace TravelAgencyApp.Tests
         [TestMethod]
         public void PracticeTest()
         {
-            var value = ExcelReader.GetCellData(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\TravelAgencyApp\Data\Data.xlsx", "Sheet1", 1, 0);
-            Console.WriteLine(value);
+            DataEngine engine = new DataEngine();
+            engine.ExecuteScript(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\TravelAgencyApp\Data\KeywordDrivenData.xlsx","TC01");
         }
     }
 }

@@ -34,14 +34,14 @@ namespace TravelAgencyApp.Ultils
 
         public static int GetTotalRows(string excelPath, string sheetName)
         {
-            IExcelDataReader reader = GetExcelReader(excelPath, sheetName);
-            return reader.AsDataSet().Tables[sheetName].Rows.Count;
+            _reader = GetExcelReader(excelPath, sheetName);
+            return _reader.AsDataSet().Tables[sheetName].Rows.Count;
         }
 
         public static object GetCellData(string excelPath, string sheetName, int row, int column)
         {
-            IExcelDataReader reader = GetExcelReader(excelPath, sheetName);
-            DataTable table = reader.AsDataSet().Tables[sheetName];
+            _reader = GetExcelReader(excelPath, sheetName);
+            DataTable table = _reader.AsDataSet().Tables[sheetName];
             return GetData(table.Rows[row][column].GetType(),table.Rows[row][column]);
         }
 

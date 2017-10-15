@@ -11,12 +11,12 @@ namespace TravelAgencyApp.Keywords
         private readonly int _locatorValueColumn;
         private readonly int _parameterColumn;
 
-        public DataEngine(int keywordColumn, int locatorTypeColumn, int locatorValueColumn,params int[] parameterColumn)
+        public DataEngine(int keywordColumn = 2, int locatorTypeColumn = 3, int locatorValueColumn = 4,int parameterColumn = 5)
         {
             _keywordColumn = keywordColumn;
             _locatorTypeColumn = locatorTypeColumn;
             _locatorValueColumn = locatorValueColumn;
-            _parameterColumn = parameterColumn[0];
+            _parameterColumn = parameterColumn;
         }
         public void PerformAction(string keyword, string locatorType, string locatorValue,params string[] argStrings)
         {
@@ -41,9 +41,12 @@ namespace TravelAgencyApp.Keywords
                     Browser.WaitUntilElementIsDisplayed(Browser.GetElementBy(locatorType, locatorValue));
                     break;
                 case "GoToPage":
-                    Browser.GoToPage(argStrings[0]);
+                    Browser.GoToPage(argStrings[0],false);
                     break;
                 case "":
+                    break;
+                case "Initialize":
+                    Browser.Initialize();
                     break;
                 default:
                     throw new NoKeywordFoundException("Keyword Not Found: "+ keyword);
