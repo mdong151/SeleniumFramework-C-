@@ -9,7 +9,6 @@ namespace TravelAgencyApp.Configurations
             Firefox,
             Chrome,
         }
-
         public enum TestEnvironmentTypes
         {
             Qa,

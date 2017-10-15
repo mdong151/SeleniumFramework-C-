@@ -6,11 +6,6 @@ namespace TravelAgencyApp.ObjectsCollection
     public class CreatePageObjects
     {
 
-        //[FindsBy(How = How.XPath, Using = "//div[@class='blockUI blockOverlay']")]
-        //public IWebElement loaddingOverlayObject { get; set; }
-
-        //public By LoaddingOverlayObject { get { return By.XPath("//div[@class='blockUI blockOverlay']"); } }
-
         public By LoaddingOverlayObject = Browser.GetElementBy("xpath", "//div[@class='blockUI blockOverlay']");
 
         public By PlaneRadio = Browser.GetElementBy("xpath", "//input[@id='radio_Flight']/following-sibling::div");
@@ -53,6 +48,7 @@ namespace TravelAgencyApp.ObjectsCollection
         public By TrainFromPlaceSearchField = Browser.GetElementBy("id", "s2id_autogen6_search");
 
         public By TrainToPlaceField = Browser.GetElementBy("id", "select2-chosen-7");
+
         public By TrainToPlaceSearchField = Browser.GetElementBy("id", "s2id_autogen7_search");
 
         public By FirstContinueButton => By.Id("btnNextFirstPage");

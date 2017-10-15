@@ -29,8 +29,7 @@ namespace TravelAgencyApp.PagesCollection
             string mainTransportType,
             string startDate,string endDate,
             string fromPlace,string toPlace,
-            string additionalServices = null
-            )
+            string additionalServices = null)
         {
 
             //
@@ -63,8 +62,6 @@ namespace TravelAgencyApp.PagesCollection
                 Browser.Select(TrainToPlaceField);
                 Browser.SearchAndSelect(TrainToPlaceSearchField,toPlace);
             }
-
-
             Browser.ClearAndEnterText(StartDateField,startDate);
             Browser.ClearAndEnterText(EndDateField,endDate);
 
@@ -77,7 +74,7 @@ namespace TravelAgencyApp.PagesCollection
         {
             Browser.Select(isHurry ? ImInAHurryButton : FirstContinueButton);
         }
-        public string GetPopupMessage()
+        public string GetPopupMessageText()
         {
             return Browser.GetText(PopupMessage);
         }
