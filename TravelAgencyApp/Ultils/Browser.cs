@@ -10,15 +10,15 @@ using static TravelAgencyApp.Configurations.Types;
 
 namespace TravelAgencyApp.Ultils
 {
-    public class Browser
+    public static class Browser
     {
         #region Hardcoded
         private static readonly By SearchingText = GetElementBy("xpath", "//li[contains(text(),'Searching…')]");
         #endregion
+        public static IWebDriver Driver = new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
 
         private static readonly BrowserTypes BrowserType = AppConfigReader.GetBrowser();
         private static readonly TestEnvironmentTypes TestEnvironment = AppConfigReader.GetTestEnvironment();
-        public static IWebDriver Driver { get; private set; }
         private static int Timeout { get; } = AppConfigReader.GetTimeout();
         public static string Title { get; } = Driver.Title;
 
@@ -42,21 +42,21 @@ namespace TravelAgencyApp.Ultils
 
         public static void Initialize()
         {
-            switch (BrowserType)
-            {
-                case BrowserTypes.InternetExplorer:
-                    Driver = new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
-                    break;
-                case BrowserTypes.Chrome:
-                    Driver = new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
-                    break;
-                case BrowserTypes.Firefox:
-                    Driver = new FirefoxDriver();
-                    break;
-                default:
-                    Driver = null;
-                    break;
-            }
+            //switch (BrowserType)
+            //{
+            //    case BrowserTypes.InternetExplorer:
+            //        Driver = new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
+            //        break;
+            //    case BrowserTypes.Chrome:
+            //        Driver = new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
+            //        break;
+            //    case BrowserTypes.Firefox:
+            //        Driver = new FirefoxDriver();
+            //        break;
+            //    default:
+            //        Driver = null;
+            //        break;
+            //}
         }
 
         public static void GoToPage(string url,bool useBaseUrl = true)

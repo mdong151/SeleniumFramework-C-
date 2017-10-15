@@ -7,13 +7,13 @@ namespace TravelAgencyApp.Configurations
         {
             InternetExplorer,
             Firefox,
-            Chrome,
+            Chrome
         }
         public enum TestEnvironmentTypes
         {
             Qa,
             Inte,
-            Product,
+            Product
         }
 
     }
