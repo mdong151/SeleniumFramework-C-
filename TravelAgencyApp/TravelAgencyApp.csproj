@@ -97,7 +97,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Data\DataDrivenTestData.xlsx" />
+    <None Include="Data\DataDrivenTestDataCSV.CSV" />
+    <None Include="Data\DataDrivenTestDataExcel.xlsx" />
     <None Include="Data\KeywordDrivenData.xlsx" />
     <None Include="packages.config" />
   </ItemGroup>
