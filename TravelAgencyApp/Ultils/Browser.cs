@@ -15,10 +15,11 @@ namespace TravelAgencyApp.Ultils
         #region Hardcoded
         private static readonly By SearchingText = GetElementBy("xpath", "//li[contains(text(),'Searching…')]");
         #endregion
+
         private static readonly BrowserTypes BrowserType = AppConfigReader.GetBrowser();
         private static readonly TestEnvironmentTypes TestEnvironment = AppConfigReader.GetTestEnvironment();
         public static IWebDriver Driver { get; private set; }
-        private static int Timeout { get; set; } = AppConfigReader.GetTimeout();
+        private static int Timeout { get; } = AppConfigReader.GetTimeout();
         public static string Title { get; } = Driver.Title;
 
         private static string BaseUrl
@@ -104,6 +105,10 @@ namespace TravelAgencyApp.Ultils
             else if (how.ToLower().Contains("class"))
             {
                 by = By.ClassName(locator);
+            }
+            else if (how.ToLower().Contains("tagname"))
+            {
+                by = By.TagName(locator);
             }
             return by;
         }
@@ -280,12 +285,6 @@ namespace TravelAgencyApp.Ultils
             var miliseconds = seconds * 1000;
             Thread.Sleep(miliseconds);
         }
-
-        //public static void Authenticate(string username,string password)
-        //{
-        //    WaitFor(5);
-        //    _webDriver.SwitchTo().Alert().SetAuthenticationCredentials(username,password);
-        //}
 
         public static bool WaitUntilElementIsInvisibled(string how, string locator, int timeoutInSeconds)
         {

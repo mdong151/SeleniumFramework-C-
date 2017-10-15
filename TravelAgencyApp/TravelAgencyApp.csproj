@@ -79,6 +79,8 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Configurations\Types.cs" />
+    <Compile Include="CustomExceptions\NoKeywordFoundException.cs" />
+    <Compile Include="Keywords\DataEngine.cs" />
     <Compile Include="Settings\AppConfigKeys.cs" />
     <Compile Include="Configurations\AppConfigReader.cs" />
     <Compile Include="ObjectsCollection\CreatePageObjects.cs" />
@@ -95,7 +97,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Data\Data.xlsx" />
+    <None Include="Data\DataDrivenTestData.xlsx" />
+    <None Include="Data\KeywordDrivenData.xlsx" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

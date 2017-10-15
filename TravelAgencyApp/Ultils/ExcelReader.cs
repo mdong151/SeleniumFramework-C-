@@ -17,7 +17,7 @@ namespace TravelAgencyApp.Ultils
             _cache = new Dictionary<string, IExcelDataReader>();
         }
 
-        public static object GetCellData(string excelPath, string sheetName, int row, int column)
+        private static IExcelDataReader GetExcelReader(string excelPath,string sheetName)
         {
             if (_cache.ContainsKey(sheetName))
             {
@@ -29,7 +29,19 @@ namespace TravelAgencyApp.Ultils
                 _reader = ExcelReaderFactory.CreateOpenXmlReader(_stream);
                 _cache.Add(sheetName, _reader);
             }
-            DataTable table = _reader.AsDataSet().Tables[sheetName];
+            return _reader;
+        }
+
+        public static int GetTotalRows(string excelPath, string sheetName)
+        {
+            IExcelDataReader reader = GetExcelReader(excelPath, sheetName);
+            return reader.AsDataSet().Tables[sheetName].Rows.Count;
+        }
+
+        public static object GetCellData(string excelPath, string sheetName, int row, int column)
+        {
+            IExcelDataReader reader = GetExcelReader(excelPath, sheetName);
+            DataTable table = reader.AsDataSet().Tables[sheetName];
             return GetData(table.Rows[row][column].GetType(),table.Rows[row][column]);
         }
 
