@@ -3,7 +3,7 @@ using TravelAgencyApp.Ultils;
 
 namespace TravelAgencyApp.PagesCollection
 {
-    public static class Pages
+    public static class Pages 
     {
         public static T GetPage<T>() where T : new()
         {

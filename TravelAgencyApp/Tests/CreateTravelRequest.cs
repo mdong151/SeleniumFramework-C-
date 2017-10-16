@@ -6,7 +6,7 @@ namespace TravelAgencyApp.Tests
     [TestClass]
     public class CreateTravelRequest : TestBase
     {
-       [TestMethod]
+       [TestMethod,TestCategory("RegressionTest")]
        public void TravelAgentCanQuicklyCreateTravelRequestForTraveller()
         {
             Pages.CreatePage.GoTo();

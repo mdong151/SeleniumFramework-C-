@@ -43,10 +43,13 @@ namespace TravelAgencyApp.Keywords
                 case "GoToPage":
                     Browser.GoToPage(argStrings[0],false);
                     break;
-                case "":
+                case "WaitUntilElementIsInvisibled":
+                    Browser.WaitUntilElementIsInvisibled(Browser.GetElementBy(locatorType, locatorValue));
                     break;
-                case "Initialize":
-                    Browser.Initialize();
+                case "WaitUntilElementIsInvisibledWithTime":
+                    Browser.WaitUntilElementIsInvisibled(Browser.GetElementBy(locatorType, locatorValue),int.Parse(argStrings[0]));
+                    break;
+                case "":
                     break;
                 default:
                     throw new NoKeywordFoundException("Keyword Not Found: "+ keyword);
