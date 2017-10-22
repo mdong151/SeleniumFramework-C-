@@ -18,43 +18,6 @@ namespace TravelAgencyApp.Keywords
             _locatorValueColumn = locatorValueColumn;
             _parameterColumn = parameterColumn;
         }
-        public void PerformAction(string keyword, string locatorType, string locatorValue,params string[] argStrings)
-        {
-            switch (keyword)
-            {
-                case "Select":
-                    Browser.Select(Browser.GetElementBy(locatorType,locatorValue));
-                    break;
-                case "EnterText":
-                    Browser.EnterText(Browser.GetElementBy(locatorType,locatorValue),argStrings[0]);
-                    break;
-                case "ClearAndEnterText":
-                    Browser.ClearAndEnterText(Browser.GetElementBy(locatorType, locatorValue),argStrings[0]);
-                    break;
-                case "SearchAndSelect":
-                    Browser.SearchAndSelect(Browser.GetElementBy(locatorType, locatorValue),argStrings[0]);
-                    break;
-                case "WaitUntilElementIsDisplayedWithTime":
-                    Browser.WaitUntilElementIsDisplayed(Browser.GetElementBy(locatorType, locatorValue), int.Parse(argStrings[0]));
-                    break;
-                case "WaitUntilElementIsDisplayed":
-                    Browser.WaitUntilElementIsDisplayed(Browser.GetElementBy(locatorType, locatorValue));
-                    break;
-                case "GoToPage":
-                    Browser.GoToPage(argStrings[0],false);
-                    break;
-                case "WaitUntilElementIsInvisibled":
-                    Browser.WaitUntilElementIsInvisibled(Browser.GetElementBy(locatorType, locatorValue));
-                    break;
-                case "WaitUntilElementIsInvisibledWithTime":
-                    Browser.WaitUntilElementIsInvisibled(Browser.GetElementBy(locatorType, locatorValue),int.Parse(argStrings[0]));
-                    break;
-                case "":
-                    break;
-                default:
-                    throw new NoKeywordFoundException("Keyword Not Found: "+ keyword);
-            }
-        }
         public void ExecuteScript(string excelPath,string sheetName)
         {
             int totalRows = ExcelReader.GetTotalRows(excelPath, sheetName);
@@ -67,5 +30,45 @@ namespace TravelAgencyApp.Keywords
                 PerformAction(keyword,locatorType,locatorValue,parameter);
             }
         }
+
+        #region PrivateMethods
+        private void PerformAction(string keyword, string locatorType, string locatorValue, params string[] argStrings)
+        {
+            switch (keyword)
+            {
+                case "Select":
+                    Browser.Select(Browser.GetElementBy(locatorType, locatorValue));
+                    break;
+                case "EnterText":
+                    Browser.EnterText(Browser.GetElementBy(locatorType, locatorValue), argStrings[0]);
+                    break;
+                case "ClearAndEnterText":
+                    Browser.ClearAndEnterText(Browser.GetElementBy(locatorType, locatorValue), argStrings[0]);
+                    break;
+                case "SearchAndSelect":
+                    Browser.SearchAndSelect(Browser.GetElementBy(locatorType, locatorValue), argStrings[0]);
+                    break;
+                case "WaitUntilElementIsDisplayedWithTime":
+                    Browser.WaitUntilElementIsDisplayed(Browser.GetElementBy(locatorType, locatorValue), int.Parse(argStrings[0]));
+                    break;
+                case "WaitUntilElementIsDisplayed":
+                    Browser.WaitUntilElementIsDisplayed(Browser.GetElementBy(locatorType, locatorValue));
+                    break;
+                case "GoToPage":
+                    Browser.GoToPage(argStrings[0], false);
+                    break;
+                case "WaitUntilElementIsInvisibled":
+                    Browser.WaitUntilElementIsInvisibled(Browser.GetElementBy(locatorType, locatorValue));
+                    break;
+                case "WaitUntilElementIsInvisibledWithTime":
+                    Browser.WaitUntilElementIsInvisibled(Browser.GetElementBy(locatorType, locatorValue), int.Parse(argStrings[0]));
+                    break;
+                case "":
+                    break;
+                default:
+                    throw new NoKeywordFoundException("Keyword Not Found: " + keyword);
+            }
+        }
+        #endregion
     }
 }

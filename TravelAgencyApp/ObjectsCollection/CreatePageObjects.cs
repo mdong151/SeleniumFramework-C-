@@ -16,7 +16,9 @@ namespace TravelAgencyApp.ObjectsCollection
 
         public By SearchingLabel => By.XPath("//li[.='Searching…']");
 
-        public By TravellerSearchField => By.Id("s2id_autogen3");
+        public By TravelTypeDropDown = Browser.GetElementBy("id", "select2-chosen-19");
+
+        public By TravellerSearchField => By.XPath("//input[@class='select2-input select2-default']");
 
         public By AnyTransportRadio => By.XPath("//input[@id='radio_any_Transport']/following-sibling::div");
 

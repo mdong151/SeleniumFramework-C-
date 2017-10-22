@@ -4,7 +4,10 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TravelAgencyApp.Configurations;
 using static TravelAgencyApp.Configurations.Types;
 
@@ -15,8 +18,7 @@ namespace TravelAgencyApp.Ultils
         #region Hardcoded
         private static readonly By SearchingText = GetElementBy("xpath", "//li[contains(text(),'Searching…')]");
         #endregion
-
-        public static IWebDriver Driver = GetDriver();
+        public static IWebDriver Driver = new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
         private static BrowserTypes _browserType = AppConfigReader.GetBrowser();
         private static TestEnvironmentTypes _testEnvironment = AppConfigReader.GetTestEnvironment();
         private static int Timeout { get; } = AppConfigReader.GetTimeout();
@@ -40,18 +42,16 @@ namespace TravelAgencyApp.Ultils
         }
         private static IWebDriver GetDriver()
         {
-            if (_browserType == BrowserTypes.InternetExplorer)
+            switch (_browserType)
             {
-                return new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers", GetInternetExplorerOption());
-            }
-            else if (_browserType == BrowserTypes.Chrome)
-                return new ChromeDriver(
-                    @"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
-            else if(_browserType == BrowserTypes.Firefox)
-                return new FirefoxDriver();
-            else
-            {
-                return null;
+                case BrowserTypes.InternetExplorer:
+                    return new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers", GetInternetExplorerOption());
+                case BrowserTypes.Chrome:
+                    return new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
+                case BrowserTypes.Firefox:
+                    return new FirefoxDriver();
+                default:
+                    return null;
             }
         }
         private static InternetExplorerOptions GetInternetExplorerOption()
@@ -359,9 +359,31 @@ namespace TravelAgencyApp.Ultils
             SearchAndSelect(byElement, textToSearch, Timeout);
         }
 
-        public static void SelectDropdown(string how, string locator, string value)
+        public static void SelectValueFromDropdown(string how, string locator, string value)
         {
+            WaitUntilElementIsDisplayed(how, locator, Timeout);
             new SelectElement(GetElement(how, locator)).SelectByText(value);
         }
+
+        
+
+        public static void SelectValueFromDropdown(By byElement, string value)
+        {
+            WaitUntilElementIsDisplayed(byElement, Timeout);
+            Select(byElement);
+            WaitUntilElementIsDisplayed(By.XPath("//div[@role='option']"));
+            ReadOnlyCollection<IWebElement> options = Driver.FindElements(By.XPath("//div[@role='option']"));
+            foreach (IWebElement option in options)
+            {
+                if (value == option.Text)
+                {
+                    option.Click();
+                    break;
+                }
+            }
+
+        }
+
+
     }
 }

@@ -35,8 +35,12 @@ namespace TravelAgencyApp.PagesCollection
             //
             //TODO: inmplement Traveltype selection
             //
-            //Browser.SearchAndSelect(TravellerSearchField, traveller, PAGE_TIME_OUT);
-            //Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject, PAGE_TIME_OUT);
+            //Browser.WaitFor(10);
+            //Browser.SelectValueFromDropdown(TravelTypeDropDown, travelType);
+            //Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject);
+
+            Browser.SearchAndSelect(TravellerSearchField, traveller);
+            Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject);
             
             if (mainTransportType.ToLower().Contains("any"))
             {
