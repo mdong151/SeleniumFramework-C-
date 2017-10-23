@@ -40,7 +40,7 @@ namespace TravelAgencyApp.Ultils
                 }
             }
         }
-        private static IWebDriver GetDriver()
+        public static IWebDriver GetDriver()
         {
             switch (_browserType)
             {
@@ -51,7 +51,7 @@ namespace TravelAgencyApp.Ultils
                 case BrowserTypes.Firefox:
                     return new FirefoxDriver();
                 default:
-                    return null;
+                    return Driver;
             }
         }
         private static InternetExplorerOptions GetInternetExplorerOption()

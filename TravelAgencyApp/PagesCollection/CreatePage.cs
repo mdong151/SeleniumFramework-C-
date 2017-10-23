@@ -10,6 +10,7 @@ namespace TravelAgencyApp.PagesCollection
         {
             Browser.GoToPageWithCredentials("/create");
             Browser.WaitUntilElementIsInvisibled(LoaddingOverlayObject);
+            Browser.Select(PopupMessage);
         }
          
         public void FakeAuthenTo(string user)

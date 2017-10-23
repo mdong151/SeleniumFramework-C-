@@ -14,6 +14,7 @@ namespace TravelAgencyApp.Ultils
         #region Field
 
         private static ILog _logger;
+        private static ILog _xmlLogger;
         private static ConsoleAppender _consoleAppender;
         private static FileAppender _fileAppender;
         private static RollingFileAppender _rollingFileAppender;
@@ -99,6 +100,17 @@ namespace TravelAgencyApp.Ultils
             BasicConfigurator.Configure(_consoleAppender, _rollingFileAppender);
             _logger = LogManager.GetLogger(type);
             return _logger;
+        }
+
+        public static ILog GetXmlLogger(Type type)
+        {
+            if (_xmlLogger != null)
+            {
+                return _xmlLogger;
+            }
+            XmlConfigurator.Configure();
+            _xmlLogger = LogManager.GetLogger(type);
+            return _xmlLogger;
         }
         #endregion
     }
