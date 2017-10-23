@@ -1,4 +1,5 @@
 ﻿
+using System.Drawing;
 using TravelAgencyApp.CustomExceptions;
 using TravelAgencyApp.Ultils;
 
@@ -6,19 +7,21 @@ namespace TravelAgencyApp.Keywords
 {
     public class DataEngine
     {
+        #region Property
         private readonly int _keywordColumn;
         private readonly int _locatorTypeColumn;
         private readonly int _locatorValueColumn;
         private readonly int _parameterColumn;
-
-        public DataEngine(int keywordColumn = 2, int locatorTypeColumn = 3, int locatorValueColumn = 4,int parameterColumn = 5)
+        #endregion
+        #region Public
+        public DataEngine(int keywordColumn = 2, int locatorTypeColumn = 3, int locatorValueColumn = 4, int parameterColumn = 5)
         {
             _keywordColumn = keywordColumn;
             _locatorTypeColumn = locatorTypeColumn;
             _locatorValueColumn = locatorValueColumn;
             _parameterColumn = parameterColumn;
         }
-        public void ExecuteScript(string excelPath,string sheetName)
+        public void ExecuteScript(string excelPath, string sheetName)
         {
             int totalRows = ExcelReader.GetTotalRows(excelPath, sheetName);
             for (int i = 1; i < totalRows; i++)
@@ -27,10 +30,10 @@ namespace TravelAgencyApp.Keywords
                 var locatorValue = ExcelReader.GetCellData(excelPath, sheetName, i, _locatorValueColumn).ToString();
                 var keyword = ExcelReader.GetCellData(excelPath, sheetName, i, _keywordColumn).ToString();
                 var parameter = ExcelReader.GetCellData(excelPath, sheetName, i, _parameterColumn).ToString();
-                PerformAction(keyword,locatorType,locatorValue,parameter);
+                PerformAction(keyword, locatorType, locatorValue, parameter);
             }
         }
-
+        #endregion
         #region PrivateMethods
         private void PerformAction(string keyword, string locatorType, string locatorValue, params string[] argStrings)
         {
