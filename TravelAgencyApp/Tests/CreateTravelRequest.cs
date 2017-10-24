@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using TravelAgencyApp.PagesCollection;
-using TravelAgencyApp.Ultils;
 
 namespace TravelAgencyApp.Tests
 {

@@ -1,21 +1,17 @@
-﻿using log4net;
-using log4net.Repository.Hierarchy;
+﻿
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using TravelAgencyApp.Ultils;
+using TravelAgencyApp.PagesCollection;
 
 namespace TravelAgencyApp.Tests
 {
     [TestClass]
-    public class Practice
+    public class Practice : TestBase
     {
         [TestMethod]
         public void PracticeTest()
         {
-            //ILog logger = Log4Net.GetLogger(typeof(Practice));
-            //logger.Warn("warning message!");
-            //logger.Debug("Debug message!");
-            ILog logger = Log4Net.GetXmlLogger(typeof(Practice));
-            logger.Debug("Debug message!");
+            Pages.GooglePage.GoTo();
+            Pages.GooglePage.Search();
         }
     }
 }

@@ -98,6 +98,7 @@
       <DependentUpon>SpecFlowFeature1.feature</DependentUpon>
     </Compile>
     <Compile Include="Keywords\DataEngine.cs" />
+    <Compile Include="PagesCollection\GooglePage.cs" />
     <Compile Include="Settings\AppConfigKeys.cs" />
     <Compile Include="Configurations\AppConfigReader.cs" />
     <Compile Include="ObjectsCollection\CreatePageObjects.cs" />

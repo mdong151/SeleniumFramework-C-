@@ -4,10 +4,9 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using log4net;
 using TravelAgencyApp.Configurations;
 using static TravelAgencyApp.Configurations.Types;
 
@@ -23,6 +22,7 @@ namespace TravelAgencyApp.Ultils
         private static TestEnvironmentTypes _testEnvironment = AppConfigReader.GetTestEnvironment();
         private static int Timeout { get; } = AppConfigReader.GetTimeout();
         public static string Title { get; } = Driver.Title;
+        private static readonly ILog Logger = Log4Net.GetXmlLogger(typeof(Browser));
         private static string BaseUrl
         {
             get
@@ -84,7 +84,11 @@ namespace TravelAgencyApp.Ultils
         public static void GoToPage(string url,bool useBaseUrl = true)
         {
             string goToUrl = (useBaseUrl) ? "https://" + BaseUrl + url : url;
-            Driver.Navigate().GoToUrl(goToUrl);           
+            Driver.Navigate().GoToUrl(goToUrl);
+            if (useBaseUrl)
+                Logger.Info("Navigate to " + "https://" + BaseUrl + url);
+            else
+                Logger.Info("Navigate to " + url);
         }
 
         public static void GoToPageWithCredentials(string url, bool useBase = true)
@@ -93,12 +97,22 @@ namespace TravelAgencyApp.Ultils
             string password = AppConfigReader.GetPassword();
             string goToUrl = (useBase) ? "https://" + username + ":" + password + "@" + BaseUrl + url 
                 : "https://" + username + ":" + password + "@" + url.Substring(1, url.Length - 1);
-            Driver.Navigate().GoToUrl(goToUrl);
+            GoToPage(goToUrl, useBase);
         }
 
         public static void Close()
         {
-            Driver.Quit();
+            try
+            {
+                Driver.Quit();
+                Logger.Info("Close Browser");
+            }
+            catch (Exception e)
+            {
+                Logger.Error("Cannot close Driver");
+                Logger.Error(e.StackTrace);
+                throw;
+            }
         }
 
         public static By GetElementBy(string how,string locator)
@@ -148,7 +162,10 @@ namespace TravelAgencyApp.Ultils
         public static string GetText(string how, string locator,int timeoutInSeconds)
         {
             WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
-            return GetElement(how, locator).Text;
+            string text = GetElement(how, locator).Text;
+            Logger.Info("Get Text from element "+ locator + ": "+ text);
+            return text;
+
         }
 
         public static string GetText(string how, string locator)
@@ -159,7 +176,9 @@ namespace TravelAgencyApp.Ultils
         public static string GetText(By element,int timeoutInSeconds)
         {
             WaitUntilElementIsDisplayed(element,timeoutInSeconds);
-            return GetElement(element).Text;
+            string text = GetElement(element).Text;
+            Logger.Info("Get Text from element " + element + ": " + text);
+            return text;
         }
 
         public static string GetText(By byElement)
@@ -182,10 +201,15 @@ namespace TravelAgencyApp.Ultils
         public static void ClearAndEnterText(By byElement, string textToType, int timeoutInSeconds)
         {
             WaitUntilElementIsDisplayed(byElement, timeoutInSeconds);
-            GetElement(byElement).Clear();
-            GetElement(byElement).SendKeys(textToType);
+            ClearText(byElement);
+            EnterText(byElement,textToType,timeoutInSeconds);
         }
 
+        public static void ClearText(By byElement)
+        {
+            GetElement(byElement).Clear();
+            Logger.Info("Clear text on element: "+ byElement);
+        }
         public static void ClearAndEnterText(By byElement, string textToType)
         {
             ClearAndEnterText(byElement, textToType, Timeout);
@@ -194,7 +218,18 @@ namespace TravelAgencyApp.Ultils
         public static void EnterText(string how, string locator, string textToType, int timeoutInSeconds )
         {
             WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
-            GetElement(how, locator).SendKeys(textToType);
+
+            try
+            {
+                GetElement(how, locator).SendKeys(textToType);
+                Logger.Info("Text "+ "'"+ textToType +"' typed on element: "+ how +"=" + locator);
+            }
+            catch (Exception e)
+            {
+                Logger.Error("Cannot enter text on element: "+ locator + " after "+ timeoutInSeconds + " seconds");
+                Logger.Error(e.StackTrace);
+                throw;
+            }
         }
 
         public static void EnterText(string how, string locator, string textToType)
@@ -205,7 +240,17 @@ namespace TravelAgencyApp.Ultils
         public static void EnterText(By byElement, string textToType, int timeoutInSeconds)
         {
             WaitUntilElementIsDisplayed(byElement,timeoutInSeconds);
-            GetElement(byElement).SendKeys(textToType);
+            try
+            {
+                GetElement(byElement).SendKeys(textToType);
+                Logger.Info("Text "+"'"+textToType+ "' typed on element " + byElement);
+            }
+            catch (Exception e)
+            {
+                Logger.Error("Could not set text to element "+ byElement);
+                Logger.Error(e.StackTrace);
+                throw;
+            }
         }
 
         public static void EnterText(By byElement, string textToType)
@@ -215,7 +260,17 @@ namespace TravelAgencyApp.Ultils
 
         public static void PressEnter(string how,string locator)
         {
-            GetElement(how, locator).SendKeys(Keys.Enter);
+            try
+            {
+                GetElement(how, locator).SendKeys(Keys.Enter);
+                Logger.Info("Press Enter on element: "+ locator);
+            }
+            catch (Exception e)
+            {
+                Logger.Error("Cannot press Enter on element: "+ locator);
+                Logger.Error(e.StackTrace);
+                throw;
+            }
         }
 
         public static void PressEnter(By byElement)
@@ -227,6 +282,7 @@ namespace TravelAgencyApp.Ultils
         {
             WaitUntilElementIsDisplayed(how, locator, timeoutInSeconds);
             GetElement(how, locator).Click();
+            Logger.Info("Click on element "+ locator);
         }
 
         public static void Select(string how, string locator)
@@ -251,10 +307,13 @@ namespace TravelAgencyApp.Ultils
             {
                 if (ElementIsDisplayed(how, locator))
                 {
+                    Logger.Info("Element "+ how + "=" + locator + " is displayed");
                     return true;
                 }
                 Thread.Sleep(1000);
+                Logger.Info("wait for " + i + " seconds," + " Element " + locator + " is not display..");
             }
+            Logger.Info("Element "+ locator +" is not display after "+timeoutInSeconds+" seconds");
             return false;
         }
 
@@ -265,8 +324,18 @@ namespace TravelAgencyApp.Ultils
 
         public static bool WaitUntilElementIsDisplayed(By byElement, int timeoutInSeconds)
         {
-            WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeoutInSeconds));
-            wait.Until(ExpectedConditions.ElementIsVisible(byElement));
+            try
+            {
+                WebDriverWait wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(timeoutInSeconds));
+                wait.Until(ExpectedConditions.ElementIsVisible(byElement));
+            }
+            catch (Exception e)
+            {
+                Logger.Error("Element " + byElement + "is NOT displayed.Below is exception");
+                Logger.Error(e.StackTrace);
+                throw;
+            }
+            Logger.Info("Element " + byElement + " is displayed");
             return false;
         }
 
@@ -300,6 +369,7 @@ namespace TravelAgencyApp.Ultils
         public static void Maximize()
         {
             Driver.Manage().Window.Maximize();
+            Logger.Info("Maximize Browser window");
         }
 
         public static void WaitFor(int seconds)

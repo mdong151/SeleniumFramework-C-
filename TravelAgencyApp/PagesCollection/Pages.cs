@@ -27,5 +27,12 @@ namespace TravelAgencyApp.PagesCollection
                 return GetPage<RequestToHandlePage>();
             }
         }
+        public static GooglePage GooglePage
+        {
+            get
+            {
+                return GetPage<GooglePage>();
+            }
+        }
     }
 }

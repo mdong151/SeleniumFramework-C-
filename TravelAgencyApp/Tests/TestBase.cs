@@ -1,5 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using TravelAgencyApp.Ultils;
 namespace TravelAgencyApp.Tests
 {
@@ -10,8 +9,6 @@ namespace TravelAgencyApp.Tests
         public void Initialize()
         {
             Browser.Maximize();
-            Console.WriteLine("Initialize sucessfully!");
-            
         }
 
         [TestCleanup]
