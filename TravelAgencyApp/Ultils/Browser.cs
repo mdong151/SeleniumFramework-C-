@@ -1,33 +1,27 @@
 ﻿using OpenQA.Selenium;
-using OpenQA.Selenium.Chrome;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading;
-using log4net;
 using TravelAgencyApp.Configurations;
 using static TravelAgencyApp.Configurations.Types;
 
 namespace TravelAgencyApp.Ultils
 {
-    public class Browser
+    public class Browser : BrowserBase
     {
         #region Hardcoded
         private static readonly By SearchingText = GetElementBy("xpath", "//li[contains(text(),'Searching…')]");
         #endregion
-        public static IWebDriver Driver = new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
-        private static BrowserTypes _browserType = AppConfigReader.GetBrowser();
-        private static TestEnvironmentTypes _testEnvironment = AppConfigReader.GetTestEnvironment();
+        private static readonly TestEnvironmentTypes TestEnvironment = AppConfigReader.GetTestEnvironment();
         private static int Timeout { get; } = AppConfigReader.GetTimeout();
         public static string Title { get; } = Driver.Title;
-        private static readonly ILog Logger = Log4Net.GetXmlLogger(typeof(Browser));
+
         private static string BaseUrl
         {
             get
             {
-                switch (_testEnvironment)
+                switch (TestEnvironment)
                 {
                     case TestEnvironmentTypes.Inte:
                         return "inte.amaris.com/TravelAgency";
@@ -40,46 +34,7 @@ namespace TravelAgencyApp.Ultils
                 }
             }
         }
-        public static IWebDriver GetDriver()
-        {
-            switch (_browserType)
-            {
-                case BrowserTypes.InternetExplorer:
-                    return new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers", GetInternetExplorerOption());
-                case BrowserTypes.Chrome:
-                    return new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
-                case BrowserTypes.Firefox:
-                    return new FirefoxDriver();
-                default:
-                    return Driver;
-            }
-        }
-        private static InternetExplorerOptions GetInternetExplorerOption()
-        {
-            InternetExplorerOptions options = new InternetExplorerOptions();
-            options.IntroduceInstabilityByIgnoringProtectedModeSettings = true;
-            options.RequireWindowFocus = true;
-            return options;
-        }
-        [Obsolete]
-        public static void Initialize()
-        {
-            //switch (BrowserType)
-            //{
-            //    case BrowserTypes.InternetExplorer:
-            //        Driver = new InternetExplorerDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
-            //        break;
-            //    case BrowserTypes.Chrome:
-            //        Driver = new ChromeDriver(@"C:\Users\MNG06\Documents\Visual Studio Code\Amaris\SeleniumFramework\Drivers");
-            //        break;
-            //    case BrowserTypes.Firefox:
-            //        Driver = new FirefoxDriver();
-            //        break;
-            //    default:
-            //        Driver = null;
-            //        break;
-            //}
-        }
+        
 
         public static void GoToPage(string url,bool useBaseUrl = true)
         {
@@ -453,7 +408,10 @@ namespace TravelAgencyApp.Ultils
             }
 
         }
-
-
+        public static void Initialize()
+        {
+            InitWebDriver();
+            Logger.Info("Browser opened");
+        }
     }
 }

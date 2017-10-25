@@ -92,6 +92,7 @@
   <ItemGroup>
     <Compile Include="Configurations\Types.cs" />
     <Compile Include="CustomExceptions\NoKeywordFoundException.cs" />
+    <Compile Include="CustomExceptions\NoSuitableDriverFoundException.cs" />
     <Compile Include="FeartureFiles\SpecFlowFeature1.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -111,6 +112,7 @@
     <Compile Include="Tests\TestBase.cs" />
     <Compile Include="Tests\CreateTravelRequest.cs" />
     <Compile Include="Ultils\Browser.cs" />
+    <Compile Include="Ultils\BrowserBase.cs" />
     <Compile Include="Ultils\ExcelReader.cs" />
     <Compile Include="Ultils\Log4Net.cs" />
   </ItemGroup>

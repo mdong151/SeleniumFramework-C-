@@ -8,6 +8,7 @@ namespace TravelAgencyApp.Tests
         [TestInitialize]
         public void Initialize()
         {
+            Browser.Initialize();
             Browser.Maximize();
         }
 

@@ -10,11 +10,11 @@ namespace TravelAgencyApp.PagesCollection
         {
             Browser.GoToPage("https://google.com",false);
         }
-        public void Search()
+        public void Search(string textToSearch)
         {
             By q = Browser.GetElementBy("name", "q");
-            Browser.EnterText(q,"ahihi");
-            Browser.PressEnter(q);
+            Browser.EnterText(q, textToSearch);
+            Browser.PressEnter("name","q");
         }
     }
 }

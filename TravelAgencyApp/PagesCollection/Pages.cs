@@ -8,7 +8,7 @@ namespace TravelAgencyApp.PagesCollection
         public static T GetPage<T>() where T : new()
         {
             var page = new T();
-            PageFactory.InitElements(Browser.Driver, page);
+            PageFactory.InitElements(BrowserBase.Driver, page);
             return page;
         }
 
