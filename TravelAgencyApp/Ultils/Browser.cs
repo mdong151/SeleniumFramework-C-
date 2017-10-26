@@ -61,6 +61,7 @@ namespace TravelAgencyApp.Ultils
             {
                 Driver.Quit();
                 Logger.Info("Close Browser");
+                Driver = null;
             }
             catch (Exception e)
             {
@@ -410,8 +411,12 @@ namespace TravelAgencyApp.Ultils
         }
         public static void Initialize()
         {
-            InitWebDriver();
-            Logger.Info("Browser opened");
+            if (Driver == null)
+            {
+                InitWebDriver();
+                Logger.Info("Browser opened");
+            }
+          
         }
     }
 }

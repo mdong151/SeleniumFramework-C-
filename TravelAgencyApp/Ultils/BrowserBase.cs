@@ -1,5 +1,4 @@
 ﻿
-using System.CodeDom;
 using log4net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
@@ -19,7 +18,9 @@ namespace TravelAgencyApp.Ultils
         private static IWebDriver _driver;
         internal static readonly ILog Logger = Log4Net.GetXmlLogger(typeof(Browser));
         private static readonly BrowserTypes BrowserType = AppConfigReader.GetBrowser();
-        public static IWebDriver Driver { get { return _driver; } }
+        public static IWebDriver Driver { get { return _driver; }
+            set { _driver = value; }
+        }
         #endregion
         
 
@@ -72,7 +73,7 @@ namespace TravelAgencyApp.Ultils
                     throw new NoSuitableDriverFoundException("Browser not supported"+ BrowserType);
             }
         }
-        public static void InitWebDriver()
+        protected static void InitWebDriver()
         {
             switch (BrowserType)
             {
