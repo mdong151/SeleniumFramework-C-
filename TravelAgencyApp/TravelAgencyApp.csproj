@@ -90,11 +90,19 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BDD\StepDefinitionFiles\CreateTravelRequest.cs" />
     <Compile Include="Configurations\Types.cs" />
     <Compile Include="CustomExceptions\NoKeywordFoundException.cs" />
     <Compile Include="CustomExceptions\NoSuitableDriverFoundException.cs" />
+    <Compile Include="BDD\FeartureFiles\CreateTravelRequest.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateTravelRequest.feature</DependentUpon>
+    </Compile>
     <Compile Include="Keywords\DataEngine.cs" />
+    <Compile Include="ObjectsCollection\HomePageObjects.cs" />
     <Compile Include="PagesCollection\GooglePage.cs" />
+    <Compile Include="PagesCollection\HomePage.cs" />
     <Compile Include="Settings\AppConfigKeys.cs" />
     <Compile Include="Configurations\AppConfigReader.cs" />
     <Compile Include="ObjectsCollection\CreatePageObjects.cs" />
@@ -116,11 +124,13 @@
     <None Include="Data\DataDrivenTestDataCSV.CSV" />
     <None Include="Data\DataDrivenTestDataExcel.xlsx" />
     <None Include="Data\KeywordDrivenData.xlsx" />
+    <None Include="BDD\FeartureFiles\CreateTravelRequest.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>CreateTravelRequest.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="FeartureFiles\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Drivers\chromedriver.exe" />
     <Content Include="Drivers\IEDriverServer.exe" />

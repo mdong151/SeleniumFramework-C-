@@ -34,5 +34,12 @@ namespace TravelAgencyApp.PagesCollection
                 return GetPage<GooglePage>();
             }
         }
+        public static HomePage HomePage
+        {
+            get
+            {
+                return GetPage<HomePage>();
+            }
+        }
     }
 }
